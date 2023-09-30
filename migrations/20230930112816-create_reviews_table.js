@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Reviews', {
+    await queryInterface.createTable('reviews', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -37,12 +37,12 @@ module.exports = {
     });
 
     // Define foreign key for the many-to-one relationship with driver_id
-    await queryInterface.addConstraint('Reviews', {
+    await queryInterface.addConstraint('reviews', {
       fields: ['driver_id'],
       type: 'foreign key',
       name: 'fk_driver_id',
       references: {
-        table: 'Drivers',
+        table: 'drivers',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -52,9 +52,9 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign key first
-    await queryInterface.removeConstraint('Reviews', 'fk_driver_id');
+    await queryInterface.removeConstraint('reviews', 'fk_driver_id');
 
-    // Drop the Reviews table
-    await queryInterface.dropTable('Reviews');
+    // Drop the reviews table
+    await queryInterface.dropTable('reviews');
   },
 };

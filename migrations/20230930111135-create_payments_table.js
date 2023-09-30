@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Payments', {
+    await queryInterface.createTable('payments', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -47,12 +47,12 @@ module.exports = {
     });
 
     // Define foreign keys for the one-to-one relationship with booking_id
-    await queryInterface.addConstraint('Payments', {
+    await queryInterface.addConstraint('payments', {
       fields: ['booking_id'],
       type: 'foreign key',
       name: 'fk_booking_id',
       references: {
-        table: 'Bookings',
+        table: 'bookings',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -60,12 +60,12 @@ module.exports = {
     });
 
     // Define foreign key for the many-to-one relationship with tenant_id
-    await queryInterface.addConstraint('Payments', {
+    await queryInterface.addConstraint('payments', {
       fields: ['tenant_id'],
       type: 'foreign key',
       name: 'fk_tenant_id',
       references: {
-        table: 'Tenants',
+        table: 'tenants',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -75,10 +75,10 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign keys first
-    await queryInterface.removeConstraint('Payments', 'fk_booking_id');
-    await queryInterface.removeConstraint('Payments', 'fk_tenant_id');
+    await queryInterface.removeConstraint('payments', 'fk_booking_id');
+    await queryInterface.removeConstraint('payments', 'fk_tenant_id');
 
-    // Drop the Payments table
-    await queryInterface.dropTable('Payments');
+    // Drop the payments table
+    await queryInterface.dropTable('payments');
   },
 };

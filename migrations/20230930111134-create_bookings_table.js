@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Bookings', {
+    await queryInterface.createTable('bookings', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -44,36 +44,36 @@ module.exports = {
     });
 
     // Define foreign keys for many-to-one relationships
-    await queryInterface.addConstraint('Bookings', {
+    await queryInterface.addConstraint('bookings', {
       fields: ['tenant_id'],
       type: 'foreign key',
       name: 'fk_tenant_id',
       references: {
-        table: 'Tenants',
+        table: 'tenants',
         field: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
 
-    await queryInterface.addConstraint('Bookings', {
+    await queryInterface.addConstraint('bookings', {
       fields: ['user_id'],
       type: 'foreign key',
       name: 'fk_user_id',
       references: {
-        table: 'Users',
+        table: 'users',
         field: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
 
-    await queryInterface.addConstraint('Bookings', {
+    await queryInterface.addConstraint('bookings', {
       fields: ['vehicle_id'],
       type: 'foreign key',
       name: 'fk_vehicle_id',
       references: {
-        table: 'Vehicles',
+        table: 'vehicles',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -84,11 +84,11 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign keys first
-    await queryInterface.removeConstraint('Bookings', 'fk_tenant_id');
-    await queryInterface.removeConstraint('Bookings', 'fk_user_id');
-    await queryInterface.removeConstraint('Bookings', 'fk_vehicle_id');
+    await queryInterface.removeConstraint('bookings', 'fk_tenant_id');
+    await queryInterface.removeConstraint('bookings', 'fk_user_id');
+    await queryInterface.removeConstraint('bookings', 'fk_vehicle_id');
 
-    // Drop the Bookings table
-    await queryInterface.dropTable('Bookings');
+    // Drop the bookings table
+    await queryInterface.dropTable('bookings');
   },
 };

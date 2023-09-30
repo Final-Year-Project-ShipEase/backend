@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Promotions', {
+    await queryInterface.createTable('promotions', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -39,12 +39,12 @@ module.exports = {
     });
 
     // Define foreign key for the many-to-one relationship with tenant_id
-    await queryInterface.addConstraint('Promotions', {
+    await queryInterface.addConstraint('promotions', {
       fields: ['tenant_id'],
       type: 'foreign key',
       name: 'fk_tenant_id',
       references: {
-        table: 'Tenants',
+        table: 'tenants',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -54,9 +54,9 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign key first
-    await queryInterface.removeConstraint('Promotions', 'fk_tenant_id');
+    await queryInterface.removeConstraint('promotions', 'fk_tenant_id');
 
-    // Drop the Promotions table
-    await queryInterface.dropTable('Promotions');
+    // Drop the promotions table
+    await queryInterface.dropTable('promotions');
   },
 };

@@ -2,7 +2,7 @@ const { JSONB } = require("sequelize");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Vehicles', {
+    await queryInterface.createTable('vehicles', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -41,24 +41,24 @@ module.exports = {
     });
 
     // Define foreign keys for one-to-many and one-to-one relationships
-    await queryInterface.addConstraint('Vehicles', {
+    await queryInterface.addConstraint('vehicles', {
       fields: ['tenant_id'],
       type: 'foreign key',
       name: 'fk_tenant_id',
       references: {
-        table: 'Tenants',
+        table: 'tenants',
         field: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
 
-    await queryInterface.addConstraint('Vehicles', {
+    await queryInterface.addConstraint('vehicles', {
       fields: ['driver_id'],
       type: 'foreign key',
       name: 'fk_driver_id',
       references: {
-        table: 'Drivers',
+        table: 'drivers',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -68,10 +68,10 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign keys first
-    await queryInterface.removeConstraint('Vehicles', 'fk_tenant_id');
-    await queryInterface.removeConstraint('Vehicles', 'fk_driver_id');
+    await queryInterface.removeConstraint('vehicles', 'fk_tenant_id');
+    await queryInterface.removeConstraint('vehicles', 'fk_driver_id');
 
-    // Drop the Vehicles table
-    await queryInterface.dropTable('Vehicles');
+    // Drop the vehicles table
+    await queryInterface.dropTable('vehicles');
   },
 };

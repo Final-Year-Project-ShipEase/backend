@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Chats', {
+    await queryInterface.createTable('chats', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -34,24 +34,24 @@ module.exports = {
     });
 
     // Define foreign keys for many-to-one relationships
-    await queryInterface.addConstraint('Chats', {
+    await queryInterface.addConstraint('chats', {
       fields: ['user_id'],
       type: 'foreign key',
       name: 'fk_user_id',
       references: {
-        table: 'Users',
+        table: 'users',
         field: 'id',
       },
       onDelete: 'CASCADE',
       onUpdate: 'CASCADE',
     });
 
-    await queryInterface.addConstraint('Chats', {
+    await queryInterface.addConstraint('chats', {
       fields: ['tenant_id'],
       type: 'foreign key',
       name: 'fk_tenant_id',
       references: {
-        table: 'Tenants',
+        table: 'tenants',
         field: 'id',
       },
       onDelete: 'CASCADE',
@@ -61,10 +61,10 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign keys first
-    await queryInterface.removeConstraint('Chats', 'fk_user_id');
-    await queryInterface.removeConstraint('Chats', 'fk_tenant_id');
+    await queryInterface.removeConstraint('chats', 'fk_user_id');
+    await queryInterface.removeConstraint('chats', 'fk_tenant_id');
 
-    // Drop the Chats table
-    await queryInterface.dropTable('Chats');
+    // Drop the chats table
+    await queryInterface.dropTable('chats');
   },
 };

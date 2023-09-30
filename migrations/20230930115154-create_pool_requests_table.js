@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Pool_Requests', {
+    await queryInterface.createTable('poolRequests', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -39,12 +39,12 @@ module.exports = {
     });
 
     // Define foreign key for the many-to-one relationship with booking_id
-    await queryInterface.addConstraint('Pool_Requests', {
+    await queryInterface.addConstraint('poolRequests', {
       fields: ['booking_id'],
       type: 'foreign key',
       name: 'fk_booking_id',
       references: {
-        table: 'Bookings',
+        table: 'bookings',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -54,9 +54,9 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign key first
-    await queryInterface.removeConstraint('Pool_Requests', 'fk_booking_id');
+    await queryInterface.removeConstraint('poolRequests', 'fk_booking_id');
 
-    // Drop the Pool_Requests table
-    await queryInterface.dropTable('Pool_Requests');
+    // Drop the poolRequests table
+    await queryInterface.dropTable('poolRequests');
   },
 };

@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Drivers', {
+    await queryInterface.createTable('drivers', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -17,7 +17,7 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
       },
-      "phone no": {
+      phoneNo: {
         type: Sequelize.INTEGER,
       },
       status: {
@@ -36,12 +36,12 @@ module.exports = {
     });
 
     // Define foreign key for the one-to-one relationship with tenant_id
-    await queryInterface.addConstraint('Drivers', {
+    await queryInterface.addConstraint('drivers', {
       fields: ['tenant_id'],
       type: 'foreign key',
       name: 'fk_tenant_id',
       references: {
-        table: 'Tenants',
+        table: 'tenants',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -51,9 +51,9 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign key first
-    await queryInterface.removeConstraint('Drivers', 'fk_tenant_id');
+    await queryInterface.removeConstraint('drivers', 'fk_tenant_id');
 
-    // Drop the Drivers table
-    await queryInterface.dropTable('Drivers');
+    // Drop the drivers table
+    await queryInterface.dropTable('drivers');
   },
 };
