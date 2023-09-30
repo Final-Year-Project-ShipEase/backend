@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-const db = require('../config/config'); // Replace with your Sequelize database configuration
 
 const Chat = db.define('Chat', {
   id: {
