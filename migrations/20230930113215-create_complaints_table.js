@@ -24,7 +24,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-
     // Drop the complaints table
     await queryInterface.dropTable('complaints');
   },

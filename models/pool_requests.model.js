@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const PoolRequest = sequelize.define('Pool_Request', {
+  const PoolRequest = sequelize.define('poolRequest', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -28,8 +28,8 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Define association to the "Bookings" model
-  PoolRequest.belongsTo(Booking, { foreignKey: 'booking_id' });
-
+  PoolRequest.associate = (models) => {
+    PoolRequest.belongsTo(models.Booking, { foreignKey: 'booking_id' });
+  };
   return PoolRequest;
 };

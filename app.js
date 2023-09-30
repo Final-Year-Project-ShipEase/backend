@@ -7,7 +7,6 @@ dotenv.config(); // Load environment variables from .env
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 // PostgresSQL configuration
 const pool = new Pool({
   host: process.env.DB_HOST,
@@ -26,9 +25,7 @@ pool.connect((err, client, release) => {
   release();
 });
 
-
 app.use(express.json());
-
 
 // Start the server
 app.listen(port, () => {

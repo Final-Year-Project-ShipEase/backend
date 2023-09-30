@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Broadcast = sequelize.define('Broadcast', {
+  const Broadcast = sequelize.define('broadcast', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -26,7 +26,8 @@ module.exports = (sequelize) => {
   });
 
   // Define association to the "Tenants" model
-  Broadcast.belongsTo(Tenant, { foreignKey: 'tenant_id' });
-
+  Broadcast.associate = (models) => {
+    Broadcast.belongsTo(models.Tenant, { foreignKey: 'tenant_id' });
+  };
   return Broadcast;
 };

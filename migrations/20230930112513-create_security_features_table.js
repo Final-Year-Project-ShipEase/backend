@@ -62,8 +62,14 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign keys first
-    await queryInterface.removeConstraint('securityFeatures', 'fk_booking_id_security_features');
-    await queryInterface.removeConstraint('securityFeatures', 'fk_driver_id_security_features');
+    await queryInterface.removeConstraint(
+      'securityFeatures',
+      'fk_booking_id_security_features'
+    );
+    await queryInterface.removeConstraint(
+      'securityFeatures',
+      'fk_driver_id_security_features'
+    );
 
     // Drop the securityFeatures table
     await queryInterface.dropTable('securityFeatures');

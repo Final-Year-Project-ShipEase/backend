@@ -1,4 +1,4 @@
-const { JSONB } = require("sequelize");
+const { JSONB } = require('sequelize');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {

@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Review = sequelize.define('Review', {
+  const Review = sequelize.define('review', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -26,8 +26,8 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Define many-to-one association to the "Drivers" model
-  Review.belongsTo(Driver, { foreignKey: 'driver_id' });
-
+  Review.associate = (models) => {
+    Review.belongsTo(models.Driver, { foreignKey: 'driver_id' });
+  };
   return Review;
 };

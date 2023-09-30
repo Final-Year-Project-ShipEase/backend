@@ -36,7 +36,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-
     // Drop the admins table
     await queryInterface.dropTable('admins');
   },

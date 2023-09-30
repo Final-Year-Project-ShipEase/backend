@@ -49,7 +49,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-
     // Drop the Tenants table
     await queryInterface.dropTable('tenants');
   },

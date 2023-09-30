@@ -79,7 +79,6 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
-
   },
 
   down: async (queryInterface) => {

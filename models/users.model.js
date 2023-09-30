@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const User = sequelize.define('User', {
+  const User = sequelize.define('user', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -31,9 +31,9 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Define associations to other models
-  User.hasMany(Chats, { foreignKey: 'UserId' });
-  User.hasMany(Bookings, { foreignKey: 'UserId' });
-
+  User.associate = (models) => {
+    User.hasMany(models.Chats, { foreignKey: 'UserId' });
+    User.hasMany(models.Bookings, { foreignKey: 'UserId' });
+  };
   return User;
 };

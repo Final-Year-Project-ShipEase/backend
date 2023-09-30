@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const DocumentDetails = sequelize.define('DocumentDetails', {
+  const DocumentDetails = sequelize.define('documentDetails', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -34,11 +34,9 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Define one-to-one association to the "Vehicles" model
-  DocumentDetails.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
-
-  // Define one-to-one association to the "Drivers" model
-  DocumentDetails.belongsTo(Driver, { foreignKey: 'driver_id' });
-
+  DocumentDetails.associate = (models) => {
+    DocumentDetails.belongsTo(models.Vehicle, { foreignKey: 'vehicle_id' });
+    DocumentDetails.belongsTo(models.Driver, { foreignKey: 'driver_id' });
+  };
   return DocumentDetails;
 };

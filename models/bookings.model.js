@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Booking = sequelize.define('Booking', {
+  const Booking = sequelize.define('booking', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -34,11 +34,12 @@ module.exports = (sequelize) => {
   });
 
   // Define associations to other models
-  Booking.belongsTo(Tenant, { foreignKey: 'tenant_id' });
-  Booking.belongsTo(User, { foreignKey: 'user_id' });
-  Booking.belongsTo(Vehicle, { foreignKey: 'vehicle_id' });
-  Booking.hasMany(PoolRequest, { foreignKey: 'booking_id' });
-  Booking.hasOne(SecurityFeature, { foreignKey: 'booking_id' });
-
+  Booking.associate = (models) => {
+    Booking.belongsTo(models.Tenant, { foreignKey: 'tenant_id' });
+    Booking.belongsTo(models.User, { foreignKey: 'user_id' });
+    Booking.belongsTo(models.Vehicle, { foreignKey: 'vehicle_id' });
+    Booking.hasMany(models.PoolRequest, { foreignKey: 'booking_id' });
+    Booking.hasOne(models.SecurityFeature, { foreignKey: 'booking_id' });
+  };
   return Booking;
 };

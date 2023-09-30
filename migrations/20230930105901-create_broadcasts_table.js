@@ -37,7 +37,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-
     // Drop the broadcasts table
     await queryInterface.dropTable('broadcasts');
   },

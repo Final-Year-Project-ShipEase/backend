@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Payment = sequelize.define('Payment', {
+  const Payment = sequelize.define('payment', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -36,11 +36,9 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Define one-to-one association to the "Bookings" model
-  Payment.hasOne(Booking, { foreignKey: 'booking_id' });
-
-  // Define many-to-one association to the "Tenants" model
-  Payment.belongsTo(Tenant, { foreignKey: 'tenant_id' });
-
+  Payment.associate = (models) => {
+    Payment.hasOne(models.Booking, { foreignKey: 'booking_id' });
+    Payment.belongsTo(models.Tenant, { foreignKey: 'tenant_id' });
+  };
   return Payment;
 };

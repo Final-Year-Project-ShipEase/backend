@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Promotion = sequelize.define('Promotion', {
+  const Promotion = sequelize.define('promotion', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -28,8 +28,8 @@ module.exports = (sequelize) => {
     },
   });
 
-  // Define many-to-one association to the "Tenants" model
-  Promotion.belongsTo(Tenant, { foreignKey: 'tenant_id' });
-
+  Promotion.associate = (models) => {
+    Promotion.belongsTo(models.Tenant, { foreignKey: 'tenant_id' });
+  };
   return Promotion;
 };
