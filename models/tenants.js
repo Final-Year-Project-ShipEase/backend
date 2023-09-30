@@ -24,7 +24,7 @@ const Tenant = db.define('Tenant', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  'phone no': {
+  phoneNo: {
     type: DataTypes.INTEGER,
   },
   cities: {

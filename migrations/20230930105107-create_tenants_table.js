@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      Name: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      "phone no": {
+      phoneNo: {
         type: Sequelize.INTEGER,
       },
       cities: {
