@@ -26,7 +26,7 @@ module.exports = {
       name: 'fk_driver_id',
       references: {
         table: 'drivers',
-        field: id,
+        field: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
@@ -34,6 +34,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
+    await queryInterface.removeConstraint('driverDetails', 'fk_driver_id')
     await queryInterface.dropTable('driverDetails');
   }
 };
