@@ -67,7 +67,7 @@ module.exports = {
       type: 'foreign key',
       name: 'fk_admin_id',
       references: {
-        table: 'admin',
+        table: 'admins',
         field: 'id',
       },
       onUpdate: 'CASCADE',
