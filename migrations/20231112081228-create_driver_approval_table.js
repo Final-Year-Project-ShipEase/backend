@@ -5,12 +5,17 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNUll: false,
+        unique: true,
       },
       tenant_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
       user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      admin_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
@@ -28,7 +33,7 @@ module.exports = {
       name: 'fk_driver_id',
       references: {
         table: 'drivers',
-        field: id,
+        field: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
@@ -57,12 +62,25 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
+
+    await queryInterface.addConstraint('driverApproval', {
+      fields: ['admin_id'],
+      type: 'foreign key',
+      name: 'fk_admin_id',
+      references: {
+        table: 'admins',
+        field: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeConstraint('driverApproval', 'fk_driver_id')
     await queryInterface.removeConstraint('driverApproval', 'fk_tenant_id')
     await queryInterface.removeConstraint('driverApproval', 'fk_user_id')
+    await queryInterface.removeConstraint('driverApproval', 'fk_admin_id')
     await queryInterface.dropTable('driverApproval');
   }
 };
