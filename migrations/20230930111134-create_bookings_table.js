@@ -28,6 +28,10 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('active', 'completed', 'reserved'),
       },
+      payment_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       date: {
         type: Sequelize.DATE,
       },
@@ -79,6 +83,18 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
+
+    await queryInterface.addConstraint('bookings', {
+      fields: ['payment_id'],
+      type: 'foreign key',
+      name: 'fk_payment_id',
+      references: {
+        table: 'payments',
+        field: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
   },
 
   down: async (queryInterface) => {
@@ -86,6 +102,7 @@ module.exports = {
     await queryInterface.removeConstraint('bookings', 'fk_tenant_id');
     await queryInterface.removeConstraint('bookings', 'fk_user_id');
     await queryInterface.removeConstraint('bookings', 'fk_vehicle_id');
+    await queryInterface.removeConstraint('bookings', 'fk_payment_id');
 
     // Drop the bookings table
     await queryInterface.dropTable('bookings');
