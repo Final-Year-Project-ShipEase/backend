@@ -1,10 +1,10 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('vehicleApproval', {
-      driver_id: {
+      vehicle_id: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
         allowNUll: false,
+        unique: true, // This enforces the one-to-one relationship
       },
       tenant_id: {
         type: Sequelize.INTEGER,
@@ -20,14 +20,18 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('active', 'closed'),
       },
+      admin_id: {
+        type: Sequelize.INTEGER,
+        allowNUll: false,
+      },
     });
 
     await queryInterface.addConstraint('vehicleApproval', {
-      fields: ['driver_id'],
+      fields: ['vehicle_id'],
       type: 'foreign key',
-      name: 'fk_driver_id',
+      name: 'fk_vehicle_id',
       references: {
-        table: 'drivers',
+        table: 'vehicles',
         field: 'id',
       },
       onUpdate: 'CASCADE',
@@ -57,12 +61,25 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
+
+    await queryInterface.addConstraint('vehicleApproval', {
+      fields: ['admin_id'],
+      type: 'foreign key',
+      name: 'fk_admin_id',
+      references: {
+        table: 'admin',
+        field: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE',
+    });
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.removeConstraint('vehicleApproval', 'fk_driver_id')
     await queryInterface.removeConstraint('vehicleApproval', 'fk_tenant_id')
     await queryInterface.removeConstraint('vehicleApproval', 'fk_user_id')
+    await queryInterface.removeConstraint('vehicleApproval', 'fk_admin_id')
     await queryInterface.dropTable('vehicleApproval');
   }
 };
