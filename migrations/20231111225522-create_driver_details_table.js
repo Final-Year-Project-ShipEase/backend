@@ -5,6 +5,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         allowNUll: false,
+        unique: true,
       },
       city: {
         type: Sequelize.STRING
@@ -17,7 +18,10 @@ module.exports = {
       },
       inspection: {
         type: Sequelize.BLOB
-      }
+      },
+      trackerNo: {
+        type: Sequelize.STRING
+      },
     });
 
     await queryInterface.addConstraint('driverDetails', {
