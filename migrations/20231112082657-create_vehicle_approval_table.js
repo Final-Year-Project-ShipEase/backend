@@ -28,7 +28,7 @@ module.exports = {
       name: 'fk_driver_id',
       references: {
         table: 'drivers',
-        field: id,
+        field: 'id',
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
