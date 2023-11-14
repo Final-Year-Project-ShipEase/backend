@@ -10,16 +10,6 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('pending', 'resolved'),
       },
-      password: {
-        type: Sequelize.STRING,
-      },
-      username: {
-        type: Sequelize.STRING,
-        unique: true,
-      },
-      data: {
-        type: Sequelize.JSON,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
