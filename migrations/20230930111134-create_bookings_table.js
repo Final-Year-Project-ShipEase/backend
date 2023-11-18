@@ -83,18 +83,6 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
     });
-
-    await queryInterface.addConstraint('bookings', {
-      fields: ['payment_id'],
-      type: 'foreign key',
-      name: 'fk_payment_id',
-      references: {
-        table: 'payments',
-        field: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    });
   },
 
   down: async (queryInterface) => {
