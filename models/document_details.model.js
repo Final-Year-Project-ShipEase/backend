@@ -17,7 +17,6 @@ module.exports = (sequelize) => {
     vehicleReg: {
       type: DataTypes.BLOB,
     },
-
   });
 
   DocumentDetail.associate = (models) => {

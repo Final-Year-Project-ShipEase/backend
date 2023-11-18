@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      status: {
+      premission: {
         type: Sequelize.ENUM('approved', 'rejected'),
       },
       status: {
@@ -76,11 +76,11 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint('driverApproval', 'fk_driver_id')
-    await queryInterface.removeConstraint('driverApproval', 'fk_tenant_id')
-    await queryInterface.removeConstraint('driverApproval', 'fk_user_id')
-    await queryInterface.removeConstraint('driverApproval', 'fk_admin_id')
+  down: async (queryInterface) => {
+    await queryInterface.removeConstraint('driverApproval', 'fk_driver_id');
+    await queryInterface.removeConstraint('driverApproval', 'fk_tenant_id');
+    await queryInterface.removeConstraint('driverApproval', 'fk_user_id');
+    await queryInterface.removeConstraint('driverApproval', 'fk_admin_id');
     await queryInterface.dropTable('driverApproval');
-  }
+  },
 };

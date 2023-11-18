@@ -40,7 +40,7 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.removeConstraint('complaints', 'fk_admin_id')
+    await queryInterface.removeConstraint('complaints', 'fk_admin_id');
     // Drop the complaints table
     await queryInterface.dropTable('complaints');
   },

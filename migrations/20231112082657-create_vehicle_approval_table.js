@@ -4,7 +4,7 @@ module.exports = {
       vehicle_id: {
         type: Sequelize.INTEGER,
         allowNUll: false,
-        unique: true, // This enforces the one-to-one relationship
+        unique: true,
       },
       tenant_id: {
         type: Sequelize.INTEGER,
@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      status: {
+      premission: {
         type: Sequelize.ENUM('approved', 'rejected'),
       },
       status: {
@@ -75,11 +75,11 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint('vehicleApproval', 'fk_driver_id')
-    await queryInterface.removeConstraint('vehicleApproval', 'fk_tenant_id')
-    await queryInterface.removeConstraint('vehicleApproval', 'fk_user_id')
-    await queryInterface.removeConstraint('vehicleApproval', 'fk_admin_id')
+  down: async (queryInterface) => {
+    await queryInterface.removeConstraint('vehicleApproval', 'fk_driver_id');
+    await queryInterface.removeConstraint('vehicleApproval', 'fk_tenant_id');
+    await queryInterface.removeConstraint('vehicleApproval', 'fk_user_id');
+    await queryInterface.removeConstraint('vehicleApproval', 'fk_admin_id');
     await queryInterface.dropTable('vehicleApproval');
-  }
+  },
 };
