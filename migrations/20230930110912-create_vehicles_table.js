@@ -16,7 +16,6 @@ module.exports = {
       driver_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
       },
       type: {
         type: Sequelize.ARRAY(Sequelize.STRING),
