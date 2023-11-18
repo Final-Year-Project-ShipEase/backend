@@ -18,6 +18,7 @@ module.exports = {
       },
       username: {
         type: Sequelize.STRING,
+        unique: true,
       },
       data: {
         type: Sequelize.JSON,

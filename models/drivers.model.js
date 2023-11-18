@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
     password: {
       type: DataTypes.STRING,
     },
-    'phone no': {
+    phoneNo: {
       type: DataTypes.INTEGER,
     },
     status: {
@@ -27,6 +27,7 @@ module.exports = (sequelize) => {
 
   Driver.associate = (models) => {
     Driver.hasOne(models.Vehicle, { foreignKey: 'driver_id' });
+    Driver.hasOne(models.DriverDetail, { foreignKey: 'driver_id' });
     Driver.hasMany(models.SecurityFeature, { foreignKey: 'driver_id' });
     Driver.hasMany(models.Review, { foreignKey: 'driver_id' });
   };

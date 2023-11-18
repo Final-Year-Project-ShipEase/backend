@@ -34,9 +34,24 @@ module.exports = {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
     });
+
+    await queryInterface.addConstraint('broadcasts', {
+      fields: ['tenant_id'],
+      type: 'foreign key',
+      name: 'fk_tenant_id',
+      references: {
+        table: 'tenants',
+        field: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+    });
   },
 
   down: async (queryInterface) => {
+    // Remove foreign keys first
+    await queryInterface.removeConstraint('chats', 'fk_tenant_id');
+
     // Drop the broadcasts table
     await queryInterface.dropTable('broadcasts');
   },
