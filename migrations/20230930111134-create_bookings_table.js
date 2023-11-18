@@ -86,6 +86,7 @@ module.exports = {
     await queryInterface.removeConstraint('bookings', 'fk_tenant_id');
     await queryInterface.removeConstraint('bookings', 'fk_user_id');
     await queryInterface.removeConstraint('bookings', 'fk_vehicle_id');
+    await queryInterface.removeConstraint('bookings', 'fk_payment_id');
 
     // Drop the bookings table
     await queryInterface.dropTable('bookings');

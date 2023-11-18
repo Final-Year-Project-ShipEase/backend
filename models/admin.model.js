@@ -24,5 +24,9 @@ module.exports = (sequelize) => {
     },
   });
 
+  Admin.associate = (models) => {
+    Admin.hasMany(models.VehicleApproval, { foreignKey: 'admin_id' });
+    Admin.hasMany(models.DriverApproval, { foreignKey: 'admin_id' });
+  };
   return Admin;
 };

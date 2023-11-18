@@ -14,7 +14,6 @@ module.exports = {
       booking_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true, // This enforces the one-to-one relationship
       },
       date: {
         type: Sequelize.DATE,

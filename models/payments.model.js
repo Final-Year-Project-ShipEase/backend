@@ -14,7 +14,6 @@ module.exports = (sequelize) => {
     booking_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true, // This enforces the one-to-one relationship
     },
     date: {
       type: DataTypes.TIMESTAMP,
@@ -37,8 +36,7 @@ module.exports = (sequelize) => {
   });
 
   Payment.associate = (models) => {
-    Payment.hasOne(models.Booking, { foreignKey: 'booking_id' });
-    Payment.belongsTo(models.Tenant, { foreignKey: 'tenant_id' });
+    Payment.belongsTo(models.Booking, { foreignKey: 'booking_id' });
   };
   return Payment;
 };

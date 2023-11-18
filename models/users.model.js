@@ -10,6 +10,7 @@ module.exports = (sequelize) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -32,8 +33,8 @@ module.exports = (sequelize) => {
   });
 
   User.associate = (models) => {
-    User.hasMany(models.Chats, { foreignKey: 'UserId' });
-    User.hasMany(models.Bookings, { foreignKey: 'UserId' });
+    User.hasMany(models.Chat, { foreignKey: 'user_id' });
+    User.hasMany(models.Booking, { foreignKey: 'user_id' });
   };
   return User;
 };
