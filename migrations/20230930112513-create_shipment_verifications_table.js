@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('securityFeatures', {
+    await queryInterface.createTable('shipmentVerifications', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -35,10 +35,10 @@ module.exports = {
     });
 
     // Define foreign keys for the one-to-one and many-to-one relationships
-    await queryInterface.addConstraint('securityFeatures', {
+    await queryInterface.addConstraint('shipmentVerifications', {
       fields: ['booking_id'],
       type: 'foreign key',
-      name: 'fk_booking_id_security_features',
+      name: 'fk_booking_id_shipment_verifications',
       references: {
         table: 'bookings',
         field: 'id',
@@ -47,10 +47,10 @@ module.exports = {
       onDelete: 'CASCADE',
     });
 
-    await queryInterface.addConstraint('securityFeatures', {
+    await queryInterface.addConstraint('shipmentVerifications', {
       fields: ['driver_id'],
       type: 'foreign key',
-      name: 'fk_driver_id_security_features',
+      name: 'fk_driver_id_shipment_verifications',
       references: {
         table: 'drivers',
         field: 'id',
@@ -63,15 +63,15 @@ module.exports = {
   down: async (queryInterface) => {
     // Remove foreign keys first
     await queryInterface.removeConstraint(
-      'securityFeatures',
-      'fk_booking_id_security_features'
+      'shipmentVerifications',
+      'fk_booking_id_shipment_verifications'
     );
     await queryInterface.removeConstraint(
-      'securityFeatures',
-      'fk_driver_id_security_features'
+      'shipmentVerifications',
+      'fk_driver_id_shipment_verifications'
     );
 
     // Drop the securityFeatures table
-    await queryInterface.dropTable('securityFeatures');
+    await queryInterface.dropTable('shipmentVerifications');
   },
 };

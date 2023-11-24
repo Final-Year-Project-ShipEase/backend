@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const SecurityFeature = sequelize.define('securityFeature', {
+  const ShipmentVerification = sequelize.define('shipmentVerifications', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -24,9 +24,9 @@ module.exports = (sequelize) => {
     },
   });
 
-  SecurityFeature.associate = (models) => {
-    SecurityFeature.belongsTo(models.Booking, { foreignKey: 'booking_id' });
-    SecurityFeature.belongsTo(models.Driver, { foreignKey: 'driver_id' });
+  ShipmentVerification.associate = (models) => {
+    ShipmentVerification.belongsTo(models.Booking, { foreignKey: 'booking_id' });
+    ShipmentVerification.belongsTo(models.Driver, { foreignKey: 'driver_id' });
   };
-  return SecurityFeature;
+  return ShipmentVerification;
 };

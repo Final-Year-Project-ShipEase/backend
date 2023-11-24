@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
     Booking.belongsTo(models.Vehicle, { foreignKey: 'vehicle_id' });
     Booking.hasMany(models.PoolRequest, { foreignKey: 'booking_id' });
     Booking.hasMany(models.Payment, { foreignKey: 'booking_id' });
-    Booking.hasOne(models.SecurityFeature, { foreignKey: 'booking_id' });
+    Booking.hasOne(models.ShipmentVerification, { foreignKey: 'booking_id' });
   };
   return Booking;
 };
