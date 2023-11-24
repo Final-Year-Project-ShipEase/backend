@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('documentDetails', {
+    await queryInterface.createTable('vehicleDetails', {
       vehicle_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -30,7 +30,7 @@ module.exports = {
     });
 
     // Define foreign keys for the one-to-one relationships
-    await queryInterface.addConstraint('documentDetails', {
+    await queryInterface.addConstraint('vehicleDetails', {
       fields: ['vehicle_id'],
       type: 'foreign key',
       name: 'fk_vehicle_id',
@@ -45,9 +45,9 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign keys first
-    await queryInterface.removeConstraint('documentDetails', 'fk_vehicle_id');
+    await queryInterface.removeConstraint('vehicleDetails', 'fk_vehicle_id');
 
     // Drop the documentDetails table
-    await queryInterface.dropTable('documentDetails');
+    await queryInterface.dropTable('vehicleDetails');
   },
 };
