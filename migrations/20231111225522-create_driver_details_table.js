@@ -16,9 +16,6 @@ module.exports = {
       liscence: {
         type: Sequelize.BLOB,
       },
-      inspection: {
-        type: Sequelize.BLOB,
-      },
       trackerNo: {
         type: Sequelize.STRING,
       },

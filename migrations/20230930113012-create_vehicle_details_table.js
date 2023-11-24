@@ -17,6 +17,9 @@ module.exports = {
       vehicleReg: {
         type: Sequelize.BLOB,
       },
+      inspection: {
+        type: Sequelize.BLOB,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

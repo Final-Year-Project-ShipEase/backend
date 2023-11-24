@@ -31,6 +31,9 @@ module.exports = (sequelize) => {
     date: {
       type: DataTypes.TIMESTAMP,
     },
+    total_bill: {
+      type: DataTypes.INTEGER,
+    },
   });
 
   // Define associations to other models
