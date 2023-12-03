@@ -16,7 +16,7 @@ const UserModel = require('./users.model');
 const VehicleModel = require('./vehicle.model');
 const BookingModel = require('./bookings.model');
 const PoolRequestModel = require('./pool_requests.model');
-const SecurityFeatureModel = require('./security_features.model');
+const ShipmentVerificationModel = require('./shipment_verifications.model');
 const PaymentModel = require('./payments.model');
 const ReviewModel = require('./reviews.model');
 const BroadcastModel = require('./broadcasts.model');
@@ -32,7 +32,7 @@ const User = UserModel(sequelize, DataTypes);
 const Vehicle = VehicleModel(sequelize, DataTypes);
 const Booking = BookingModel(sequelize, DataTypes);
 const PoolRequest = PoolRequestModel(sequelize, DataTypes);
-const SecurityFeature = SecurityFeatureModel(sequelize, DataTypes);
+const ShipmentVerification = ShipmentVerificationModel(sequelize, DataTypes);
 const Payment = PaymentModel(sequelize, DataTypes);
 const Review = ReviewModel(sequelize, DataTypes);
 const Broadcast = BroadcastModel(sequelize, DataTypes);
@@ -50,7 +50,7 @@ module.exports = {
   Vehicle,
   Booking,
   PoolRequest,
-  SecurityFeature,
+  ShipmentVerification,
   Payment,
   Review,
   Broadcast,
