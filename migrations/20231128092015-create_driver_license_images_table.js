@@ -27,7 +27,10 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.removeConstraint('driverLicenseImages', 'fk_driver_license_id');
+    await queryInterface.removeConstraint(
+      'driverLicenseImages',
+      'fk_driver_license_id'
+    );
     await queryInterface.dropTable('driverLicenseImages');
   },
 };

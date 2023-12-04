@@ -7,7 +7,7 @@ module.exports = {
       },
       vehicleReg: {
         type: Sequelize.BLOB,
-      }, 
+      },
       inspection: {
         type: Sequelize.BLOB,
       },
@@ -30,7 +30,10 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.removeConstraint('vehicleImages', 'fk_vehicle_images_id');
+    await queryInterface.removeConstraint(
+      'vehicleImages',
+      'fk_vehicle_images_id'
+    );
     await queryInterface.dropTable('vehicleImages');
   },
 };

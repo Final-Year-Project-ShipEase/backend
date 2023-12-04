@@ -2,17 +2,17 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   const VehicleImages = sequelize.define('vehicleImages', {
     vehicle_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     vehicleReg: {
-        type: DataTypes.BLOB,
+      type: DataTypes.BLOB,
     },
     inspection: {
-        type: DataTypes.BLOB,
+      type: DataTypes.BLOB,
     },
     vehiclePictures: {
-        type: DataTypes.JSON,
+      type: DataTypes.JSON,
     },
   });
 

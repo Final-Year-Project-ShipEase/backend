@@ -9,7 +9,7 @@ module.exports = {
       tenant_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      }, 
+      },
       admin_id: {
         type: Sequelize.INTEGER,
         allowNUll: false,

@@ -2,14 +2,14 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   const DriverLicenseImages = sequelize.define('driverLicenseImages', {
     driver_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     license: {
-        type: DataTypes.BLOB,
+      type: DataTypes.BLOB,
     },
     profilePicture: {
-        type: DataTypes.BLOB,
+      type: DataTypes.BLOB,
     },
   });
 

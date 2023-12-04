@@ -25,7 +25,9 @@ module.exports = (sequelize) => {
   });
 
   ShipmentVerification.associate = (models) => {
-    ShipmentVerification.belongsTo(models.Booking, { foreignKey: 'booking_id' });
+    ShipmentVerification.belongsTo(models.Booking, {
+      foreignKey: 'booking_id',
+    });
     ShipmentVerification.belongsTo(models.Driver, { foreignKey: 'driver_id' });
   };
   return ShipmentVerification;
