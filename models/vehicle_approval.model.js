@@ -10,10 +10,6 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     premission: {
       type: DataTypes.ENUM('approved', 'rejected'),
     },

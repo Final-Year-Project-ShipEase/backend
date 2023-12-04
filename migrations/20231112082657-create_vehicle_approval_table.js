@@ -10,19 +10,15 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      user_id: {
+      admin_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNUll: false,
       },
       premission: {
         type: Sequelize.ENUM('approved', 'rejected'),
       },
       status: {
         type: Sequelize.ENUM('active', 'closed'),
-      },
-      admin_id: {
-        type: Sequelize.INTEGER,
-        allowNUll: false,
       },
     });
 
@@ -51,18 +47,6 @@ module.exports = {
     });
 
     await queryInterface.addConstraint('vehicleApproval', {
-      fields: ['user_id'],
-      type: 'foreign key',
-      name: 'fk_user_id',
-      references: {
-        table: 'users',
-        field: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    });
-
-    await queryInterface.addConstraint('vehicleApproval', {
       fields: ['admin_id'],
       type: 'foreign key',
       name: 'fk_admin_id',
@@ -78,7 +62,6 @@ module.exports = {
   down: async (queryInterface) => {
     await queryInterface.removeConstraint('vehicleApproval', 'fk_driver_id');
     await queryInterface.removeConstraint('vehicleApproval', 'fk_tenant_id');
-    await queryInterface.removeConstraint('vehicleApproval', 'fk_user_id');
     await queryInterface.removeConstraint('vehicleApproval', 'fk_admin_id');
     await queryInterface.dropTable('vehicleApproval');
   },

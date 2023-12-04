@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const DocumentDetail = sequelize.define('documentDetails', {
+  const VehicleDetail = sequelize.define('vehicleDetails', {
     vehicle_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -17,10 +17,13 @@ module.exports = (sequelize) => {
     vehicleReg: {
       type: DataTypes.BLOB,
     },
+    inspection: {
+      type: DataTypes.BLOB,
+    },
   });
 
-  DocumentDetail.associate = (models) => {
-    DocumentDetail.belongsTo(models.Vehicle, { foreignKey: 'vehicle_id' });
+  VehicleDetail.associate = (models) => {
+    VehicleDetail.belongsTo(models.Vehicle, { foreignKey: 'vehicle_id' });
   };
-  return DocumentDetail;
+  return VehicleDetail;
 };

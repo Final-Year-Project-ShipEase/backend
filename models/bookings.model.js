@@ -31,6 +31,9 @@ module.exports = (sequelize) => {
     date: {
       type: DataTypes.TIMESTAMP,
     },
+    total_bill: {
+      type: DataTypes.INTEGER,
+    },
   });
 
   // Define associations to other models
@@ -40,7 +43,7 @@ module.exports = (sequelize) => {
     Booking.belongsTo(models.Vehicle, { foreignKey: 'vehicle_id' });
     Booking.hasMany(models.PoolRequest, { foreignKey: 'booking_id' });
     Booking.hasMany(models.Payment, { foreignKey: 'booking_id' });
-    Booking.hasOne(models.SecurityFeature, { foreignKey: 'booking_id' });
+    Booking.hasOne(models.ShipmentVerification, { foreignKey: 'booking_id' });
   };
   return Booking;
 };

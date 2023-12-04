@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Driver = sequelize.define('driver', {
+  const Driver = sequelize.define('drivers', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
   Driver.associate = (models) => {
     Driver.hasOne(models.Vehicle, { foreignKey: 'driver_id' });
     Driver.hasOne(models.DriverDetail, { foreignKey: 'driver_id' });
-    Driver.hasMany(models.SecurityFeature, { foreignKey: 'driver_id' });
+    Driver.hasMany(models.ShipmentVerification, { foreignKey: 'driver_id' });
     Driver.hasMany(models.Review, { foreignKey: 'driver_id' });
   };
   return Driver;
