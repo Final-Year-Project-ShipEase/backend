@@ -24,6 +24,12 @@ const ComplaintModel = require('./complaints.model');
 const DocumentDetails = require('./document_details.model');
 const Driver = require('./drivers.model');
 const Promotion = require('./promotions.model');
+const DriverApprovalModel = require('./driver_approval.model');
+const DriverDetailsModel = require('./driver_details.model');
+const DriverLicenseImageModel = require('./driver_license_images.model');
+const VehicleApprovalModel = require('./vehicle_approval.model');
+const VehicleDetailsModel = require('./vehicle_details.model');
+const VehicleImageModel = require('./vehicle_images.model');
 
 const Admin = AdminModel(sequelize, DataTypes);
 const Chat = ChatModel(sequelize, DataTypes);
@@ -40,6 +46,12 @@ const Complaint = ComplaintModel(sequelize, DataTypes);
 const DocumentDetail = DocumentDetails(sequelize, DataTypes);
 const DriverModel = Driver(sequelize, DataTypes);
 const PromotionModel = Promotion(sequelize, DataTypes);
+const DriverApproval = DriverApprovalModel(sequelize, DataTypes);
+const DriverDetails = DriverDetailsModel(sequelize, DataTypes);
+const DriverLicenseImages = DriverLicenseImageModel(sequelize, DataTypes);
+const VehicleApproval = VehicleApprovalModel(sequelize, DataTypes);
+const VehicleDetails = VehicleDetailsModel(sequelize, DataTypes);
+const VehicleImages = VehicleImageModel(sequelize, DataTypes);
 
 module.exports = {
   sequelize,
@@ -58,4 +70,10 @@ module.exports = {
   DocumentDetail,
   DriverModel,
   PromotionModel,
+  DriverApproval,
+  DriverDetails,
+  DriverLicenseImages,
+  VehicleApproval,
+  VehicleDetails,
+  VehicleImages,
 };
