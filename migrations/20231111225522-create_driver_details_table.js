@@ -8,19 +8,19 @@ module.exports = {
         unique: true,
       },
       city: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       cnic: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       liscence: {
-        type: Sequelize.BLOB
+        type: Sequelize.BLOB,
       },
       inspection: {
-        type: Sequelize.BLOB
+        type: Sequelize.BLOB,
       },
       trackerNo: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
     });
 
@@ -37,8 +37,8 @@ module.exports = {
     });
   },
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeConstraint('driverDetails', 'fk_driver_id')
+  down: async (queryInterface) => {
+    await queryInterface.removeConstraint('driverDetails', 'fk_driver_id');
     await queryInterface.dropTable('driverDetails');
-  }
+  },
 };

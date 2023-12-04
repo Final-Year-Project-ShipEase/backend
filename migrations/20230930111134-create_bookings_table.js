@@ -28,10 +28,6 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('active', 'completed', 'reserved'),
       },
-      payment_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       date: {
         type: Sequelize.DATE,
       },
@@ -78,18 +74,6 @@ module.exports = {
       name: 'fk_vehicle_id',
       references: {
         table: 'vehicles',
-        field: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    });
-
-    await queryInterface.addConstraint('bookings', {
-      fields: ['payment_id'],
-      type: 'foreign key',
-      name: 'fk_payment_id',
-      references: {
-        table: 'payments',
         field: 'id',
       },
       onUpdate: 'CASCADE',

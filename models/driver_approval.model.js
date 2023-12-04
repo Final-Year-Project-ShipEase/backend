@@ -16,14 +16,14 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     admin_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    status: {
+    premission: {
       type: DataTypes.ENUM('approved', 'rejected'),
     },
     status: {
-        type: DataTypes.ENUM('active', 'closed'),
+      type: DataTypes.ENUM('active', 'closed'),
     },
   });
 

@@ -28,10 +28,6 @@ module.exports = (sequelize) => {
     status: {
       type: DataTypes.ENUM('active', 'completed', 'reserved'),
     },
-    payment_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     date: {
       type: DataTypes.TIMESTAMP,
     },

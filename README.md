@@ -8,6 +8,10 @@ This README would normally document whatever steps are necessary to get your app
 * Version 1.0.0
 * Postgres db
 
+### Database Schema
+
+![My Image](utils/dbSchema.jpg)
+
 ### How do I get set up? ###
 
 * Clone this repository by `git clone https://github.com/Final-Year-Project-ShipEase/backend.git`

@@ -14,16 +14,16 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    status: {
+    premission: {
       type: DataTypes.ENUM('approved', 'rejected'),
     },
     status: {
-        type: DataTypes.ENUM('active', 'closed'),
-      },
-      admin_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+      type: DataTypes.ENUM('active', 'closed'),
+    },
+    admin_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 
   VehicleApproval.associate = (models) => {
