@@ -8,5 +8,6 @@ router.get('/user/:id', userController.getUserById);
 router.post('/user', userController.createUser);
 router.put('/user/:id', userController.updateUser);
 router.delete('user/:id', userController.deleteUserById);
+router.get('/users/index', userController.getUsersWithPagination);
 
 module.exports = router;
