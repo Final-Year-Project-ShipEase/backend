@@ -1,7 +1,7 @@
 // routes/broadcastRoutes.js
 const express = require('express');
 const router = express.Router();
-const broadcastController = require('../controllers/broadcast');
+const broadcastController = require('../controllers/broadcasts');
 
 router.get('/broadcasts', broadcastController.getAllBroadcasts);
 router.get('/broadcast/:id', broadcastController.getBroadcastById);

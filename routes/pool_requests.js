@@ -1,7 +1,7 @@
 // routes/poolRequestRoutes.js
 const express = require('express');
 const router = express.Router();
-const poolRequestController = require('../controllers/poolRequest');
+const poolRequestController = require('../controllers/pool_requests');
 
 router.get('/poolRequests', poolRequestController.getAllPoolRequests);
 router.get('/poolRequest/:id', poolRequestController.getPoolRequestById);

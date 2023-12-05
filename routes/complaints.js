@@ -1,7 +1,7 @@
 // routes/complaintRoutes.js
 const express = require('express');
 const router = express.Router();
-const complaintController = require('../controllers/complaint');
+const complaintController = require('../controllers/complaints');
 
 router.get('/complaints', complaintController.getAllComplaints);
 router.get('/complaint/:id', complaintController.getComplaintById);

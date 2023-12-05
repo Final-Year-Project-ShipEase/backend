@@ -1,5 +1,5 @@
 // controllers/driverApprovalController.js
-const { DriverApproval, Driver, Admin, Tenant } = require('../models');
+const { DriverApproval } = require('../models');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -41,7 +41,13 @@ exports.getDriverApprovalById = async (req, res) => {
 exports.createDriverApproval = async (req, res) => {
   const { driver_id, tenant_id, admin_id, permission, status } = req.body;
   try {
-    const newDriverApproval = await DriverApproval.create({ driver_id, tenant_id, admin_id, permission, status });
+    const newDriverApproval = await DriverApproval.create({
+      driver_id,
+      tenant_id,
+      admin_id,
+      permission,
+      status,
+    });
     res.status(201).json(newDriverApproval);
   } catch (error) {
     res.status(500).json({ error: error.message });

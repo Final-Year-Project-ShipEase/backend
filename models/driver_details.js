@@ -1,7 +1,7 @@
 // routes/driverDetailRoutes.js
 const express = require('express');
 const router = express.Router();
-const driverDetailController = require('../controllers/driverDetail');
+const driverDetailController = require('../controllers/driver_details');
 
 router.get('/driverDetails', driverDetailController.getAllDriverDetails);
 router.get(

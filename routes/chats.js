@@ -1,7 +1,7 @@
 // routes/chatRoutes.js
 const express = require('express');
 const router = express.Router();
-const chatController = require('../controllers/chatController');
+const chatController = require('../controllers/chats');
 
 router.get('/chats', chatController.getAllChats);
 router.get('/chat/:id', chatController.getChatById);

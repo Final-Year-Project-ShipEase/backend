@@ -1,5 +1,5 @@
 // controllers/broadcastController.js
-const { Broadcast, Tenant } = require('../models');
+const { Broadcast } = require('../models');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);

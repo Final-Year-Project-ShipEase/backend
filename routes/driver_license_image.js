@@ -1,7 +1,7 @@
 // routes/driverLicenseImagesRoutes.js
 const express = require('express');
 const router = express.Router();
-const driverLicenseImagesController = require('../controllers/driverLicenseImagesController');
+const driverLicenseImagesController = require('../controllers/driver_license_images');
 
 router.get(
   '/driverLicenseImages',

@@ -1,5 +1,11 @@
 // controllers/driverController.js
-const { Driver, Vehicle, DriverDetail, ShipmentVerification, Review } = require('../models');
+const {
+  Driver,
+  Vehicle,
+  DriverDetail,
+  ShipmentVerification,
+  Review,
+} = require('../models');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -41,7 +47,13 @@ exports.getDriverById = async (req, res) => {
 exports.createDriver = async (req, res) => {
   const { tenant_id, name, password, phoneNo, status } = req.body;
   try {
-    const newDriver = await Driver.create({ tenant_id, name, password, phoneNo, status });
+    const newDriver = await Driver.create({
+      tenant_id,
+      name,
+      password,
+      phoneNo,
+      status,
+    });
     res.status(201).json(newDriver);
   } catch (error) {
     res.status(500).json({ error: error.message });

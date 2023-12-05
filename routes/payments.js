@@ -1,7 +1,7 @@
 // routes/paymentRoutes.js
 const express = require('express');
 const router = express.Router();
-const paymentController = require('../controllers/payment');
+const paymentController = require('../controllers/payments');
 
 router.get('/payments', paymentController.getAllPayments);
 router.get('/payment/:id', paymentController.getPaymentById);

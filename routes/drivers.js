@@ -1,7 +1,7 @@
 // routes/driverRoutes.js
 const express = require('express');
 const router = express.Router();
-const driverController = require('../controllers/driverController');
+const driverController = require('../controllers/drivers');
 
 router.get('/drivers', driverController.getAllDrivers);
 router.get('/driver/:id', driverController.getDriverById);

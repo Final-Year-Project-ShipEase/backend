@@ -1,7 +1,7 @@
 // routes/driverApprovalRoutes.js
 const express = require('express');
 const router = express.Router();
-const driverApprovalController = require('../controllers/driverApproval');
+const driverApprovalController = require('../controllers/driver_approvals');
 
 router.get('/driverApprovals', driverApprovalController.getAllDriverApprovals);
 router.get(

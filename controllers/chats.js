@@ -1,5 +1,5 @@
 // controllers/chatController.js
-const { Chat, User, Tenant } = require('../models');
+const { Chat } = require('../models');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);

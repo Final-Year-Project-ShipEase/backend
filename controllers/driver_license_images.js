@@ -1,5 +1,5 @@
 // controllers/driverLicenseImagesController.js
-const { DriverLicenseImages, Driver } = require('../models');
+const { DriverLicenseImages } = require('../models');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);

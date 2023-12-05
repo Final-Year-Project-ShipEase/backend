@@ -41,7 +41,14 @@ exports.getPoolRequestById = async (req, res) => {
 exports.createPoolRequest = async (req, res) => {
   const { booking_id, types, city, destination, startDate, endDate } = req.body;
   try {
-    const newPoolRequest = await PoolRequest.create({ booking_id, types, city, destination, startDate, endDate });
+    const newPoolRequest = await PoolRequest.create({
+      booking_id,
+      types,
+      city,
+      destination,
+      startDate,
+      endDate,
+    });
     res.status(201).json(newPoolRequest);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -54,7 +61,14 @@ exports.updatePoolRequest = async (req, res) => {
   try {
     const poolRequest = await PoolRequest.findByPk(id);
     if (poolRequest) {
-      await poolRequest.update({ booking_id, types, city, destination, startDate, endDate });
+      await poolRequest.update({
+        booking_id,
+        types,
+        city,
+        destination,
+        startDate,
+        endDate,
+      });
       res.json(poolRequest);
     } else {
       res.status(404).json({ error: 'PoolRequest not found' });
