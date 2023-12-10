@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     date: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
   });
 

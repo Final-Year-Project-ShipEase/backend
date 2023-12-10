@@ -3,9 +3,12 @@ const express = require('express');
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 dotenv.config(); // Load environment variables from .env
+const admin = require('./routes/admin');
+const users = require('./routes/users');
+const drivers = require('./routes/drivers');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 12345;
 
 // PostgresSQL configuration
 const pool = new Pool({
@@ -26,6 +29,9 @@ pool.connect((err, client, release) => {
 });
 
 app.use(express.json());
+app.use(admin);
+app.use(users);
+app.use(drivers);
 
 // Start the server
 app.listen(port, () => {

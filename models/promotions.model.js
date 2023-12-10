@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     validationTill: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
     status: {
       type: DataTypes.ENUM('active', 'expired'),
