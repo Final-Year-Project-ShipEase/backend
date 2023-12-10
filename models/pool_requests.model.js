@@ -21,10 +21,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     startDate: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
     endDate: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
   });
 

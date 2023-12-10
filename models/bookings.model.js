@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('active', 'completed', 'reserved'),
     },
     date: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
     total_bill: {
       type: DataTypes.INTEGER,

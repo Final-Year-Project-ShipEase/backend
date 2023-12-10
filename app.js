@@ -3,6 +3,7 @@ const express = require('express');
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 dotenv.config(); // Load environment variables from .env
+const vehicle = require('./routes/vehicles');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,7 +27,7 @@ pool.connect((err, client, release) => {
 });
 
 app.use(express.json());
-
+app.use(vehicle)
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

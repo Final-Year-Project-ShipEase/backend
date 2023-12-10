@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.JSON,
     },
     date: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
     phoneNo: {
       type: DataTypes.INTEGER,
