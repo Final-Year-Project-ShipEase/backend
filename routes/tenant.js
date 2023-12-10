@@ -1,7 +1,7 @@
 // routes/tenantsRoutes.js
 const express = require('express');
 const router = express.Router();
-const tenantsController = require('../controllers/tenant');
+const tenantController = require('../controllers/tenant');
 
 router.get('/tenants', tenantController.getAllTenants);
 router.get('/tenant/:id', tenantController.getTenantById);

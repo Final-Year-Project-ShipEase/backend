@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
       },
       phoneNo: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       cities: {
         type: Sequelize.ARRAY(Sequelize.STRING),
