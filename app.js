@@ -2,6 +2,7 @@
 const express = require('express');
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
+const { Admin } = require('./models');
 dotenv.config(); // Load environment variables from .env
 
 const admin = require('./routes/admin');
