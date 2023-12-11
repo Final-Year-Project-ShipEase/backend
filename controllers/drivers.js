@@ -5,8 +5,8 @@ const {
   DriverDetail,
   ShipmentVerification,
   Review,
+  Tenant,
 } = require('../models');
-
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -126,6 +126,25 @@ exports.getVehiclesForDriverWithPagination = async (req, res) => {
     const paginationData = calculatePagination(count, pageSize, page);
 
     res.json({ vehicles: rows, pagination: paginationData });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.getTenantForDriverById = async (req, res) => {
+  const { tenant_id } = req.params;
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = 10;
+  try {
+    const { count, rows } = await Driver.findAndCountAll({
+      where: { tenant_id },
+      limit: pageSize,
+      offset: (page - 1) * pageSize,
+    });
+
+    const paginationData = calculatePagination(count, pageSize, page);
+
+    res.json({ tenants: rows, pagination: paginationData });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

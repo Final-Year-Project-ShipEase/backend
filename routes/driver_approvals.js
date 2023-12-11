@@ -36,4 +36,11 @@ router.get(
   driverApprovalController.getDriverApprovalsForAdminWithPagination
 );
 
+router.get(
+  '/driverApproval/approve/:id',
+  driverApprovalController.approveDriver
+);
+
+router.get('/driverApproval/reject/:id', driverApprovalController.rejectDriver);
+
 module.exports = router;

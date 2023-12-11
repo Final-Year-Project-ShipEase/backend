@@ -145,3 +145,33 @@ exports.getDriverApprovalsForAdminWithPagination = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.approveDriver = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const driverApproval = await DriverApproval.findByPk(id);
+    if (driverApproval) {
+      await driverApproval.update({ permission: 'approved' });
+      res.json(driverApproval);
+    } else {
+      res.status(404).json({ error: 'DriverApproval not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.rejectDriver = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const driverApproval = await DriverApproval.findByPk(id);
+    if (driverApproval) {
+      await driverApproval.update({ permission: 'rejected' });
+      res.json(driverApproval);
+    } else {
+      res.status(404).json({ error: 'DriverApproval not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

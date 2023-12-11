@@ -18,6 +18,11 @@ router.get(
   driverController.getVehiclesForDriverWithPagination
 );
 
+router.get(
+  '/drivers/tenant/:tenant_id/index',
+  driverController.getTenantForDriverById
+);
+
 // Index route with backend pagination of 10 results, associated with DriverDetail
 router.get(
   '/drivers/:driver_id/driverDetails/index',
