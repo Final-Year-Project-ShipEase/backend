@@ -20,10 +20,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNUll: false,
       },
-      admin_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       permission: {
         type: Sequelize.ENUM('approved', 'rejected'),
       },

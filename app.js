@@ -4,13 +4,13 @@ const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const cors = require('cors');
 
-dotenv.config(); // Load environment variables from .env
+dotenv.config();
 
 const admin = require('./routes/admin');
 const user = require('./routes/users');
 const tenant = require('./routes/tenant');
 const driver = require('./routes/drivers');
-const driverDetail = require('./routes/driver_details')
+const driverDetail = require('./routes/driver_details');
 const driverAppproval = require('./routes/driver_approvals');
 const driverLicenseImage = require('./routes/driver_license_image');
 const vehicle = require('./routes/vehicles');
@@ -22,7 +22,7 @@ const broadcast = require('./routes/broadcasts');
 const promotion = require('./routes/promotion');
 
 const app = express();
-const port = process.env.DB_PORT || 12345;
+const port = process.env.BACKEND_PORT || 3000;
 
 // PostgresSQL configuration
 const pool = new Pool({

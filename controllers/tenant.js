@@ -47,9 +47,6 @@ const updateTenant = async (req, res) => {
   const { username, name, email, password, phoneNo, cities, permissions, status } = req.body;
   try {
     const tenant = await Tenant.findByPk(id);
-    if (!tenant) {
-      return res.status(404).json({ error: error.message });
-    }
 
     await tenant.update({
       username,

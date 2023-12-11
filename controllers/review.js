@@ -46,10 +46,6 @@ const updateReview = async (req, res) => {
   const { driver_id, star, review, date } = req.body;
   try {
     const reviewInstance = await Review.findByPk(id);
-    if (!reviewInstance) {
-      return res.status(404).json({ error: error.message });
-    }
-
     await reviewInstance.update({
       driver_id,
       star,
@@ -68,10 +64,6 @@ const deleteReviewById = async (req, res) => {
   const { id } = req.params;
   try {
     const review = await Review.findByPk(id);
-    if (!review) {
-      return res.status(404).json({ error: error.message });
-    }
-
     await review.destroy();
 
     res.json({ message: 'Review deleted successfully' });

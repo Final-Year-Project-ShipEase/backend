@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.ENUM('Available', 'Intransit'),
       },
       location: {
-        type: Sequelize.GEOMETRY('POINT'),
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
