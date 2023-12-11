@@ -21,7 +21,7 @@ const broadcast = require('./routes/broadcasts');
 const promotion = require('./routes/promotion');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 12345;
 
 // PostgresSQL configuration
 const pool = new Pool({
