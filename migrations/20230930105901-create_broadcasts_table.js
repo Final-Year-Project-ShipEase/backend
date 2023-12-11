@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
       phoneNo: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       status: {
         type: Sequelize.ENUM('Active', 'Inactive'),

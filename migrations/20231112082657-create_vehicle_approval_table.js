@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      premission: {
+      permission: {
         type: Sequelize.ENUM('approved', 'rejected'),
       },
       status: {

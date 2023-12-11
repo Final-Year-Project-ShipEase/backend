@@ -17,6 +17,8 @@ const vehicleDetail = require('./routes/vehicle_details');
 const vehicleApproval = require('./routes/vehicles_approval');
 const vehicleImage = require('./routes/vehicle_images');
 const chat = require('./routes/chats')
+const broadcast = require('./routes/broadcasts');
+const promotion = require('./routes/promotion');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -52,6 +54,8 @@ app.use(vehicleDetail);
 app.use(vehicleApproval);
 app.use(vehicleImage);
 app.use(chat);
+app.use(broadcast);
+app.use(promotion);
 
 // Start the server
 app.listen(port, () => {
