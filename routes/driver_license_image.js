@@ -8,19 +8,19 @@ router.get(
   driverLicenseImagesController.getAllDriverLicenseImages
 );
 router.get(
-  '/driverLicenseImages/:driver_id',
+  '/driverLicenseImage/:driver_id',
   driverLicenseImagesController.getDriverLicenseImagesById
 );
 router.post(
-  '/driverLicenseImages',
+  '/driverLicenseImage',
   driverLicenseImagesController.createDriverLicenseImages
 );
 router.put(
-  '/driverLicenseImages/:driver_id',
+  '/driverLicenseImage/:driver_id',
   driverLicenseImagesController.updateDriverLicenseImages
 );
 router.delete(
-  '/driverLicenseImages/:driver_id',
+  '/driverLicenseImage/:driver_id',
   driverLicenseImagesController.deleteDriverLicenseImagesById
 );
 

@@ -1,6 +1,12 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   const VehicleImages = sequelize.define('vehicleImages', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
     vehicle_id: {
       type: DataTypes.INTEGER,
       allowNull: false,

@@ -1,7 +1,7 @@
 // routes/reviewsRoutes.js
 const express = require('express');
 const router = express.Router();
-const reviewsController = require('../controllers/review');
+const reviewController = require('../controllers/review');
 
 router.get('/reviews', reviewController.getAllReviews);
 router.get('/review/:id', reviewController.getReviewById);

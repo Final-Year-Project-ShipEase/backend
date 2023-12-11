@@ -1,5 +1,3 @@
-const { JSONB } = require('sequelize');
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('vehicles', {
@@ -27,7 +25,7 @@ module.exports = {
         type: Sequelize.ENUM('Available', 'Intransit'),
       },
       location: {
-        type: JSONB,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

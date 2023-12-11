@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       phoneNo: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       status: {
         type: Sequelize.ENUM('Active', 'Inactive'),
@@ -39,7 +39,7 @@ module.exports = {
     await queryInterface.addConstraint('drivers', {
       fields: ['tenant_id'],
       type: 'foreign key',
-      name: 'fk_tenant_id',
+      name: 'fk_driver_tenant_id',
       references: {
         table: 'tenants',
         field: 'id',
@@ -51,7 +51,7 @@ module.exports = {
 
   down: async (queryInterface) => {
     // Remove foreign key first
-    await queryInterface.removeConstraint('drivers', 'fk_tenant_id');
+    await queryInterface.removeConstraint('drivers', 'fk_driver_tenant_id');
 
     // Drop the drivers table
     await queryInterface.dropTable('drivers');

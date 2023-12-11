@@ -1,11 +1,15 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('driverDetails', {
-      driver_id: {
+      id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        allowNUll: false,
-        unique: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
+      driver_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       city: {
         type: Sequelize.STRING,
@@ -18,6 +22,16 @@ module.exports = {
       },
       trackerNo: {
         type: Sequelize.STRING,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
     });
 

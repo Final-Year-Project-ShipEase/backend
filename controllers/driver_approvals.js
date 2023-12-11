@@ -48,6 +48,7 @@ exports.createDriverApproval = async (req, res) => {
       permission,
       status,
     });
+
     res.status(201).json(newDriverApproval);
   } catch (error) {
     res.status(500).json({ error: error.message });

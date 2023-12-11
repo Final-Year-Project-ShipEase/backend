@@ -7,6 +7,7 @@ const {
   Review,
 } = require('../models');
 
+
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
   const nextPage = currentPage < totalPages ? currentPage + 1 : null;
@@ -47,6 +48,7 @@ exports.getDriverById = async (req, res) => {
 exports.createDriver = async (req, res) => {
   const { tenant_id, name, password, phoneNo, status } = req.body;
   try {
+    // Create a new driver with the provided data
     const newDriver = await Driver.create({
       tenant_id,
       name,
