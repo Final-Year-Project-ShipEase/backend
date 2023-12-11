@@ -10,6 +10,9 @@ const user = require('./routes/users');
 const tenant = require('./routes/tenant');
 const driver = require('./routes/drivers');
 const chat = require('./routes/chats')
+const driverDetail = require('./routes/driver_details')
+const driverAppproval = require('./routes/driver_approvals');
+const driverLicenseImage = require('./routes/driver_license_image')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -38,7 +41,9 @@ app.use(user);
 app.use(tenant);
 app.use(driver);
 app.use(chat);
-
+app.use(driverDetail);
+app.use(driverAppproval);
+app.use(driverLicenseImage);
 
 // Start the server
 app.listen(port, () => {

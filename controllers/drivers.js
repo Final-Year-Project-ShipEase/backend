@@ -47,7 +47,6 @@ exports.getDriverById = async (req, res) => {
 
 exports.createDriver = async (req, res) => {
   const { tenant_id, name, password, phoneNo, status } = req.body;
-  console.log(tenant_id);
   try {
     // Create a new driver with the provided data
     const newDriver = await Driver.create({
@@ -57,7 +56,6 @@ exports.createDriver = async (req, res) => {
       phoneNo,
       status,
     });
-
     res.status(201).json(newDriver);
   } catch (error) {
     res.status(500).json({ error: error.message });

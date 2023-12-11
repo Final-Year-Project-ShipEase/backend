@@ -1,11 +1,15 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   const DriverDetail = sequelize.define('driverDetails', {
-    driver_id: {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      allowNullValues: false,
-      unique: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    driver_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     city: {
       type: DataTypes.STRING,

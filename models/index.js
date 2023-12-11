@@ -21,7 +21,7 @@ const PaymentModel = require('./payments.model');
 const ReviewModel = require('./reviews.model');
 const BroadcastModel = require('./broadcasts.model');
 const ComplaintModel = require('./complaints.model');
-const Driver = require('./drivers.model');
+const DriverModel = require('./drivers.model');
 const Promotion = require('./promotions.model');
 const DriverApprovalModel = require('./driver_approval.model');
 const DriverDetailsModel = require('./driver_details.model');
@@ -42,10 +42,10 @@ const Payment = PaymentModel(sequelize, DataTypes);
 const Review = ReviewModel(sequelize, DataTypes);
 const Broadcast = BroadcastModel(sequelize, DataTypes);
 const Complaint = ComplaintModel(sequelize, DataTypes);
-const DriverModel = Driver(sequelize, DataTypes);
+const Driver = DriverModel(sequelize, DataTypes);
 const PromotionModel = Promotion(sequelize, DataTypes);
 const DriverApproval = DriverApprovalModel(sequelize, DataTypes);
-const DriverDetails = DriverDetailsModel(sequelize, DataTypes);
+const DriverDetail = DriverDetailsModel(sequelize, DataTypes);
 const DriverLicenseImages = DriverLicenseImageModel(sequelize, DataTypes);
 const VehicleApproval = VehicleApprovalModel(sequelize, DataTypes);
 const VehicleDetails = VehicleDetailsModel(sequelize, DataTypes);
@@ -65,10 +65,10 @@ module.exports = {
   Review,
   Broadcast,
   Complaint,
-  DriverModel,
+  Driver,
   PromotionModel,
   DriverApproval,
-  DriverDetails,
+  DriverDetail,
   DriverLicenseImages,
   VehicleApproval,
   VehicleDetails,
