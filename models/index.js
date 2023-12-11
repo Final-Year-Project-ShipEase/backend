@@ -48,7 +48,7 @@ const DriverApproval = DriverApprovalModel(sequelize, DataTypes);
 const DriverDetail = DriverDetailsModel(sequelize, DataTypes);
 const DriverLicenseImages = DriverLicenseImageModel(sequelize, DataTypes);
 const VehicleApproval = VehicleApprovalModel(sequelize, DataTypes);
-const VehicleDetails = VehicleDetailsModel(sequelize, DataTypes);
+const VehicleDetail = VehicleDetailsModel(sequelize, DataTypes);
 const VehicleImages = VehicleImageModel(sequelize, DataTypes);
 
 module.exports = {
@@ -71,6 +71,6 @@ module.exports = {
   DriverDetail,
   DriverLicenseImages,
   VehicleApproval,
-  VehicleDetails,
+  VehicleDetail,
   VehicleImages,
 };

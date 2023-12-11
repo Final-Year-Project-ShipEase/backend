@@ -7,10 +7,9 @@ const {
 
 // Create a new vehicle
 const createVehicle = async (req, res) => {
-  const {tenant, driver,type, reg,status,loc} = req.body;
-  console.log(tenant)
+  const {tenant_id, driver_id,type, regNo,status,location} = req.body;
   try {
-    const vehicle = await Vehicle.create({tenant,driver,type,reg,status,loc});
+    const vehicle = await Vehicle.create({tenant_id,driver_id,type,regNo,status,location});
     return res.status(201).json(vehicle);
   } catch (error) {
     return res.status(500).json({ error: error.message });

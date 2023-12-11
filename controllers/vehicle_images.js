@@ -1,7 +1,7 @@
 const { VehicleImages } = require('../models');
 
 // Create new vehicle images
-const createVehicleImages = async (req, res) => {
+const createVehicleImage = async (req, res) => {
   try {
     const vehicleImages = await VehicleImages.create(req.body);
     return res.status(201).json(vehicleImages);
@@ -21,7 +21,7 @@ const getAllVehicleImages = async (req, res) => {
 };
 
 // Get vehicle images by ID
-const getVehicleImagesById = async (req, res) => {
+const getVehicleImageById = async (req, res) => {
   const vehicleImagesId = req.params.id;
   try {
     const vehicleImages = await VehicleImages.findByPk(vehicleImagesId);
@@ -35,7 +35,7 @@ const getVehicleImagesById = async (req, res) => {
 };
 
 // Update vehicle images by ID
-const updateVehicleImages = async (req, res) => {
+const updateVehicleImage = async (req, res) => {
   const vehicleImagesId = req.params.id;
   try {
     const [updatedRows] = await VehicleImages.update(req.body, {
@@ -52,7 +52,7 @@ const updateVehicleImages = async (req, res) => {
 };
 
 // Delete vehicle images by ID
-const deleteVehicleImagesById = async (req, res) => {
+const deleteVehicleImageById = async (req, res) => {
   const vehicleImagesId = req.params.id;
   try {
     const deletedRows = await VehicleImages.destroy({
@@ -68,9 +68,9 @@ const deleteVehicleImagesById = async (req, res) => {
 };
 
 module.exports = {
-  createVehicleImages,
+  createVehicleImage,
   getAllVehicleImages,
-  getVehicleImagesById,
-  updateVehicleImages,
-  deleteVehicleImagesById,
+  getVehicleImageById,
+  updateVehicleImage,
+  deleteVehicleImageById,
 };

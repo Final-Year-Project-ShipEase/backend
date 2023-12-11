@@ -9,10 +9,14 @@ const admin = require('./routes/admin');
 const user = require('./routes/users');
 const tenant = require('./routes/tenant');
 const driver = require('./routes/drivers');
-const chat = require('./routes/chats')
 const driverDetail = require('./routes/driver_details')
 const driverAppproval = require('./routes/driver_approvals');
-const driverLicenseImage = require('./routes/driver_license_image')
+const driverLicenseImage = require('./routes/driver_license_image');
+const vehicle = require('./routes/vehicles');
+const vehicleDetail = require('./routes/vehicle_details');
+const vehicleApproval = require('./routes/vehicles_approval');
+const vehicleImage = require('./routes/vehicle_images');
+const chat = require('./routes/chats')
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -40,10 +44,14 @@ app.use(admin);
 app.use(user);
 app.use(tenant);
 app.use(driver);
-app.use(chat);
 app.use(driverDetail);
 app.use(driverAppproval);
 app.use(driverLicenseImage);
+app.use(vehicle);
+app.use(vehicleDetail);
+app.use(vehicleApproval);
+app.use(vehicleImage);
+app.use(chat);
 
 // Start the server
 app.listen(port, () => {
