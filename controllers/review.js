@@ -1,5 +1,5 @@
 // controllers/reviewController.js
-const { Review } = require('../models'); 
+const { Review } = require('../models');
 
 const getAllReviews = async (req, res) => {
   try {

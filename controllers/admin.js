@@ -32,7 +32,7 @@ exports.createAdmin = async (req, res) => {
       email,
       password,
       username,
-      data
+      data,
     });
     res.status(201).json(newAdmin);
   } catch (error) {

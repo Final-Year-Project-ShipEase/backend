@@ -24,7 +24,16 @@ const getTenantById = async (req, res) => {
 };
 
 const createTenant = async (req, res) => {
-  const { username, name, email, password, phoneNo, cities, permissions, status } = req.body;
+  const {
+    username,
+    name,
+    email,
+    password,
+    phoneNo,
+    cities,
+    permissions,
+    status,
+  } = req.body;
   try {
     const newTenant = await Tenant.create({
       username,
@@ -44,7 +53,16 @@ const createTenant = async (req, res) => {
 
 const updateTenant = async (req, res) => {
   const { id } = req.params;
-  const { username, name, email, password, phoneNo, cities, permissions, status } = req.body;
+  const {
+    username,
+    name,
+    email,
+    password,
+    phoneNo,
+    cities,
+    permissions,
+    status,
+  } = req.body;
   try {
     const tenant = await Tenant.findByPk(id);
 

@@ -75,9 +75,18 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.removeConstraint('driverApprovals', 'fk_approval_driver_id');
-    await queryInterface.removeConstraint('driverApprovals', 'fk_approval_tenant_id');
-    await queryInterface.removeConstraint('driverApprovals', 'fk_approval_admin_id');
+    await queryInterface.removeConstraint(
+      'driverApprovals',
+      'fk_approval_driver_id'
+    );
+    await queryInterface.removeConstraint(
+      'driverApprovals',
+      'fk_approval_tenant_id'
+    );
+    await queryInterface.removeConstraint(
+      'driverApprovals',
+      'fk_approval_admin_id'
+    );
     await queryInterface.dropTable('driverApprovals');
   },
 };

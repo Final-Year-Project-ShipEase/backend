@@ -1,14 +1,28 @@
-const {
-  Vehicle,
-  VehicleApproval,
-  VehicleImages,
-} = require('../models');
+const { Vehicle, VehicleApproval, VehicleImages } = require('../models');
 
 // Create a new vehicle
 const createVehicle = async (req, res) => {
-  const {tenant_id, driver_id,type, regNo,status,location, trackerNo, ownerCnic} = req.body;
+  const {
+    tenant_id,
+    driver_id,
+    type,
+    regNo,
+    status,
+    location,
+    trackerNo,
+    ownerCnic,
+  } = req.body;
   try {
-    const vehicle = await Vehicle.create({tenant_id,driver_id,type,regNo,status,location, trackerNo,ownerCnic});
+    const vehicle = await Vehicle.create({
+      tenant_id,
+      driver_id,
+      type,
+      regNo,
+      status,
+      location,
+      trackerNo,
+      ownerCnic,
+    });
     return res.status(201).json(vehicle);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -98,7 +112,6 @@ const indexVehicles = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
-
 
 // Index route with backend pagination, associated with VehicleApproval
 const getVehicleApprovalsForVehicleWithPagination = async (req, res) => {

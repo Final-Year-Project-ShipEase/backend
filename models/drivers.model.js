@@ -1,4 +1,3 @@
-
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   const Driver = sequelize.define('drivers', {
@@ -24,12 +23,20 @@ module.exports = (sequelize) => {
     status: {
       type: DataTypes.ENUM('Active', 'Inactive'),
     },
+    city: {
+      type: DataTypes.STRING,
+    },
+    cnic: {
+      type: DataTypes.STRING,
+    },
+    trackerNo: {
+      type: DataTypes.STRING,
+    },
   });
 
   Driver.associate = (models) => {
     Driver.belongsTo(models.Tenant, { foreignKey: 'tenant_id' });
     Driver.hasOne(models.Vehicle, { foreignKey: 'driver_id' });
-    Driver.hasOne(models.DriverDetail, { foreignKey: 'driver_id' });
     Driver.hasMany(models.ShipmentVerification, { foreignKey: 'driver_id' });
     Driver.hasMany(models.Review, { foreignKey: 'driver_id' });
   };
