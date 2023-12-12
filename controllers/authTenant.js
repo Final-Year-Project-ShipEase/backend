@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const secretKey = 'your-secret-key'; // Replace with your secret key
-const expiresIn = '1h'; // Token expiration time, e.g., 1 hour
+const secretKey = 'SHIPEASE'; 
+const expiresIn = '1h'; 
 const {Tenant} = require('../models');
 
 
