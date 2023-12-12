@@ -43,4 +43,9 @@ router.get(
 
 router.get('/driverApproval/reject/:id', driverApprovalController.rejectDriver);
 
+router.get(
+  '/driverApprovals/rejected',
+  driverApprovalController.getRejectedDriverApprovals
+);
+
 module.exports = router;

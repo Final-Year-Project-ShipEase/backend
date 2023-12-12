@@ -24,4 +24,9 @@ router.delete(
   vehicleApprovalController.deleteVehicleApprovalById
 );
 
+router.get(
+  '/vehicleApprovals/rejected',
+  vehicleApprovalController.getRejectedVehicleApprovals
+);
+
 module.exports = router;

@@ -175,3 +175,14 @@ exports.rejectDriver = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.getRejectedDriverApprovals = async (req, res) => {
+  try {
+    const rejectedApprovals = await DriverApproval.findAll({
+      where: { permission: 'rejected' },
+    });
+    return res.status(200).json(rejectedApprovals);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};

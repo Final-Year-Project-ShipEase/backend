@@ -69,10 +69,23 @@ const deleteVehicleApprovalById = async (req, res) => {
   }
 };
 
+// Get rejected vehicle approvals
+const getRejectedVehicleApprovals = async (req, res) => {
+  try {
+    const rejectedApprovals = await VehicleApproval.findAll({
+      where: { permission: 'rejected' },
+    });
+    return res.status(200).json(rejectedApprovals);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createVehicleApproval,
   getAllVehicleApprovals,
   getVehicleApprovalById,
   updateVehicleApproval,
   deleteVehicleApprovalById,
+  getRejectedVehicleApprovals,
 };
