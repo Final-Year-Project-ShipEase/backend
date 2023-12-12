@@ -1,15 +1,14 @@
 const {
   Vehicle,
-  VehicleDetail,
   VehicleApproval,
   VehicleImages,
 } = require('../models');
 
 // Create a new vehicle
 const createVehicle = async (req, res) => {
-  const {tenant_id, driver_id,type, regNo,status,location} = req.body;
+  const {tenant_id, driver_id,type, regNo,status,location, trackerNo, ownerCnic} = req.body;
   try {
-    const vehicle = await Vehicle.create({tenant_id,driver_id,type,regNo,status,location});
+    const vehicle = await Vehicle.create({tenant_id,driver_id,type,regNo,status,location, trackerNo,ownerCnic});
     return res.status(201).json(vehicle);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -100,36 +99,6 @@ const indexVehicles = async (req, res) => {
   }
 };
 
-// Index route with backend pagination, associated with VehicleDetail
-const getVehicleDetailsForVehicleWithPagination = async (req, res) => {
-  const { vehicle_id } = req.params;
-  try {
-    const page = req.query.page || 1; // Default to page 1 if not specified
-    const pageSize = 10; // Number of results per page
-
-    const { count, rows } = await VehicleDetail.findAndCountAll({
-      where: { vehicle_id },
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
-    });
-
-    const totalPages = Math.ceil(count / pageSize);
-    const currentPage = parseInt(page, 10);
-    const startPage = Math.max(1, currentPage - 2);
-    const endPage = Math.min(totalPages, startPage + 4);
-
-    return res.status(200).json({
-      vehicles: rows,
-      totalCount: count,
-      currentPage,
-      totalPages,
-      startPage,
-      endPage,
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-};
 
 // Index route with backend pagination, associated with VehicleApproval
 const getVehicleApprovalsForVehicleWithPagination = async (req, res) => {
@@ -199,7 +168,6 @@ module.exports = {
   updateVehicle,
   deleteVehicleById,
   indexVehicles,
-  getVehicleDetailsForVehicleWithPagination,
   getVehicleApprovalsForVehicleWithPagination,
   getVehicleImagesForVehicleWithPagination,
 };

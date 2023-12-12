@@ -20,8 +20,7 @@ exports.getAccessToken = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     try {
         const decodedToken = jwt.verify(token, secretKey);
-
-        res.json({ message: 'Admin protected resource accessed successfully', decodedToken });
+        res.json({decodedToken });
       } catch (error) {
         res.status(401).json({ error: 'Invalid or expired token' });
       }

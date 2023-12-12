@@ -27,6 +27,12 @@ module.exports = {
       location: {
         type: Sequelize.STRING,
       },
+      trackerNo: {
+        type: Sequelize.STRING,
+      },
+      ownerCnic: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

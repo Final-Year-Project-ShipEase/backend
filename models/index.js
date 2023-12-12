@@ -27,7 +27,6 @@ const DriverApprovalModel = require('./driver_approval.model');
 const DriverDetailsModel = require('./driver_details.model');
 const DriverLicenseImageModel = require('./driver_license_images.model');
 const VehicleApprovalModel = require('./vehicle_approval.model');
-const VehicleDetailsModel = require('./vehicle_details.model');
 const VehicleImageModel = require('./vehicle_images.model');
 
 const Admin = AdminModel(sequelize, DataTypes);
@@ -48,7 +47,6 @@ const DriverApproval = DriverApprovalModel(sequelize, DataTypes);
 const DriverDetail = DriverDetailsModel(sequelize, DataTypes);
 const DriverLicenseImages = DriverLicenseImageModel(sequelize, DataTypes);
 const VehicleApproval = VehicleApprovalModel(sequelize, DataTypes);
-const VehicleDetail = VehicleDetailsModel(sequelize, DataTypes);
 const VehicleImages = VehicleImageModel(sequelize, DataTypes);
 
 module.exports = {
@@ -71,6 +69,5 @@ module.exports = {
   DriverDetail,
   DriverLicenseImages,
   VehicleApproval,
-  VehicleDetail,
   VehicleImages,
 };

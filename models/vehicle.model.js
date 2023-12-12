@@ -26,12 +26,17 @@ module.exports = (sequelize) => {
     location: {
       type: DataTypes.GEOMETRY('POINT'),
     },
+    trackerNo: {
+      type: DataTypes.STRING,
+    },
+    ownerCnic: {
+      type: DataTypes.STRING,
+    },
   });
 
   Vehicle.associate = (models) => {
     Vehicle.hasMany(models.Booking, { foreignKey: 'vehicle_id' });
     Vehicle.belongsTo(models.Driver, { foreignKey: 'driver_id' });
-    Vehicle.hasOne(models.VehicleDetail, { foreignKey: 'vehicle_id' });
     Vehicle.hasOne(models.VehicleApproval, { foreignKey: 'vehicle_id' });
   };
   return Vehicle;

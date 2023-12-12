@@ -12,11 +12,6 @@ router.delete('/vehicle/:id', vehicleController.deleteVehicleById);
 // Index route with backend pagination
 router.get('/vehicles/index', vehicleController.indexVehicles);
 
-// Index route with backend pagination, associated with VehicleDetails
-router.get(
-  '/vehicles/:vehicle_id/vehicleDetails/index',
-  vehicleController.getVehicleDetailsForVehicleWithPagination
-);
 
 // Index route with backend pagination, associated with VehicleApprovals
 router.get(
