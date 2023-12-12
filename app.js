@@ -3,7 +3,6 @@ const express = require('express');
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
 const cors = require('cors');
-
 dotenv.config();
 
 const admin = require('./routes/admin');
@@ -20,6 +19,8 @@ const vehicleImage = require('./routes/vehicle_images');
 const chat = require('./routes/chats');
 const broadcast = require('./routes/broadcasts');
 const promotion = require('./routes/promotion');
+const authAdmin = require('./routes/authAdmin');
+const authTenant = require('./routes/authTenant');
 
 const app = express();
 const port = process.env.BACKEND_PORT || 3000;
@@ -42,6 +43,7 @@ pool.connect((err, client, release) => {
   release();
 });
 
+
 app.use(cors());
 app.use(express.json());
 app.use(admin);
@@ -58,6 +60,8 @@ app.use(vehicleImage);
 app.use(chat);
 app.use(broadcast);
 app.use(promotion);
+app.use(authAdmin);
+app.use(authTenant);
 
 // Start the server
 app.listen(port, () => {
