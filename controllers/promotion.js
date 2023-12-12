@@ -26,7 +26,8 @@ const getPromotionById = async (req, res) => {
 };
 
 const createPromotion = async (req, res) => {
-  const { tenant_id, couponNo, validationTill, status, phoneNo, city } = req.body;
+  const { tenant_id, couponNo, validationTill, status, phoneNo, city } =
+    req.body;
   try {
     const newPromotion = await Promotion.create({
       tenant_id,
@@ -45,7 +46,8 @@ const createPromotion = async (req, res) => {
 
 const updatePromotion = async (req, res) => {
   const { id } = req.params;
-  const { tenant_id, couponNo, validationTill, status, phoneNo, city } = req.body;
+  const { tenant_id, couponNo, validationTill, status, phoneNo, city } =
+    req.body;
   try {
     const promotionInstance = await Promotion.findByPk(id);
     if (!promotionInstance) {

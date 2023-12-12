@@ -23,12 +23,6 @@ router.get(
   driverController.getTenantForDriverById
 );
 
-// Index route with backend pagination of 10 results, associated with DriverDetail
-router.get(
-  '/drivers/:driver_id/driverDetails/index',
-  driverController.getDriverDetailsForDriverWithPagination
-);
-
 // Index route with backend pagination of 10 results, associated with ShipmentVerification
 router.get(
   '/drivers/:driver_id/shipmentVerifications/index',

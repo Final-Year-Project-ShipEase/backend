@@ -1,12 +1,5 @@
 // controllers/driverController.js
-const {
-  Driver,
-  Vehicle,
-  DriverDetail,
-  ShipmentVerification,
-  Review,
-  Tenant,
-} = require('../models');
+const { Driver, Vehicle, ShipmentVerification, Review } = require('../models');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -46,7 +39,8 @@ exports.getDriverById = async (req, res) => {
 };
 
 exports.createDriver = async (req, res) => {
-  const { tenant_id, name, password, phoneNo, status } = req.body;
+  const { tenant_id, name, password, phoneNo, status, city, cnic, trackerNo } =
+    req.body;
   try {
     // Create a new driver with the provided data
     const newDriver = await Driver.create({
@@ -55,6 +49,9 @@ exports.createDriver = async (req, res) => {
       password,
       phoneNo,
       status,
+      city,
+      cnic,
+      trackerNo,
     });
     res.status(201).json(newDriver);
   } catch (error) {
@@ -64,11 +61,21 @@ exports.createDriver = async (req, res) => {
 
 exports.updateDriver = async (req, res) => {
   const { id } = req.params;
-  const { tenant_id, name, password, phoneNo, status } = req.body;
+  const { tenant_id, name, password, phoneNo, status, city, cnic, trackerNo } =
+    req.body;
   try {
     const driver = await Driver.findByPk(id);
     if (driver) {
-      await driver.update({ tenant_id, name, password, phoneNo, status });
+      await driver.update({
+        tenant_id,
+        name,
+        password,
+        phoneNo,
+        status,
+        city,
+        cnic,
+        trackerNo,
+      });
       res.json(driver);
     } else {
       res.status(404).json({ error: 'Driver not found' });
@@ -145,26 +152,6 @@ exports.getTenantForDriverById = async (req, res) => {
     const paginationData = calculatePagination(count, pageSize, page);
 
     res.json({ tenants: rows, pagination: paginationData });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-// Index route with backend pagination of 10 results, associated with DriverDetail
-exports.getDriverDetailsForDriverWithPagination = async (req, res) => {
-  const { driver_id } = req.params;
-  const page = parseInt(req.query.page) || 1;
-  const pageSize = 10;
-  try {
-    const { count, rows } = await DriverDetail.findAndCountAll({
-      where: { driver_id },
-      limit: pageSize,
-      offset: (page - 1) * pageSize,
-    });
-
-    const paginationData = calculatePagination(count, pageSize, page);
-
-    res.json({ driverDetails: rows, pagination: paginationData });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

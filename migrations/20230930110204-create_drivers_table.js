@@ -23,6 +23,15 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('Active', 'Inactive'),
       },
+      city: {
+        type: Sequelize.STRING,
+      },
+      cnic: {
+        type: Sequelize.STRING,
+      },
+      trackerNo: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
