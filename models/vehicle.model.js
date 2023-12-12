@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('Available', 'Intransit'),
     },
     location: {
-      type: DataTypes.GEOMETRY('POINT'),
+      type: DataTypes.STRING,
     },
     trackerNo: {
       type: DataTypes.STRING,
