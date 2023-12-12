@@ -18,6 +18,11 @@ router.get(
   vehicleController.getVehicleApprovalsForVehicleWithPagination
 );
 
+router.get(
+  '/vehicles/tenant/:tenant_id/index',
+  vehicleController.getTenantForVehicleById
+);
+
 // Index route with backend pagination, associated with VehicleImages
 router.get(
   '/vehicles/:vehicle_id/vehicleImages/index',
