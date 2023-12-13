@@ -8,5 +8,6 @@ router.get('/tenant/:id', tenantController.getTenantById);
 router.post('/tenant', tenantController.createTenant);
 router.put('/tenant/:id', tenantController.updateTenant);
 router.delete('/tenant/:id', tenantController.deleteTenantById);
+router.post('/tenantlogin', tenantController.getUserData);
 
 module.exports = router;

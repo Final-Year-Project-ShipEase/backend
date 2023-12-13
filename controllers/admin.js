@@ -70,3 +70,19 @@ exports.deleteAdminById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// controllers/adminController.js
+exports.getUserData = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const admin = await Admin.findOne({ where: { username, password } });
+    if (admin) {
+      res.json(admin);
+    } else {
+      res.status(404).json({ error: 'Invalid username or password' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+

@@ -101,10 +101,29 @@ const deleteTenantById = async (req, res) => {
   }
 };
 
+const getUserData = async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    const tenant = await Tenant.findOne({
+      where: {
+        username,
+        password,
+      },
+    });
+    if (!tenant) {
+      return res.status(404).json({ error: 'Tenant not found' });
+    }
+    res.json(tenant);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getAllTenants,
   getTenantById,
   createTenant,
   updateTenant,
   deleteTenantById,
+  getUserData,
 };
