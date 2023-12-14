@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Promotion = sequelize.define('promotion', {
+  const Promotion = sequelize.define('promotions', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -15,13 +15,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     validationTill: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
     status: {
       type: DataTypes.ENUM('active', 'expired'),
     },
     phoneNo: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     city: {
       type: DataTypes.STRING,

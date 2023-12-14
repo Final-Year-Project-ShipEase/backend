@@ -2,10 +2,26 @@
 const express = require('express');
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
-dotenv.config(); // Load environment variables from .env
+const cors = require('cors');
+dotenv.config();
+
+const admin = require('./routes/admin');
+const user = require('./routes/users');
+const tenant = require('./routes/tenant');
+const driver = require('./routes/drivers');
+const driverAppproval = require('./routes/driver_approvals');
+const driverLicenseImage = require('./routes/driver_license_image');
+const vehicle = require('./routes/vehicles');
+const vehicleApproval = require('./routes/vehicles_approval');
+const vehicleImage = require('./routes/vehicle_images');
+const chat = require('./routes/chats');
+const broadcast = require('./routes/broadcasts');
+const promotion = require('./routes/promotion');
+const authAdmin = require('./routes/authAdmin');
+const authTenant = require('./routes/authTenant');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.BACKEND_PORT || 3000;
 
 // PostgresSQL configuration
 const pool = new Pool({
@@ -25,7 +41,22 @@ pool.connect((err, client, release) => {
   release();
 });
 
+app.use(cors());
 app.use(express.json());
+app.use(admin);
+app.use(user);
+app.use(tenant);
+app.use(driver);
+app.use(driverAppproval);
+app.use(driverLicenseImage);
+app.use(vehicle);
+app.use(vehicleApproval);
+app.use(vehicleImage);
+app.use(chat);
+app.use(broadcast);
+app.use(promotion);
+app.use(authAdmin);
+app.use(authTenant);
 
 // Start the server
 app.listen(port, () => {

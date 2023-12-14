@@ -1,21 +1,24 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('documentDetails', {
+    await queryInterface.createTable('vehicleImages', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
       vehicle_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        unique: true,
-      },
-      trackerNo: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      ownerCnic: {
-        type: Sequelize.STRING,
-        allowNull: false,
+        allowNUll: false,
       },
       vehicleReg: {
         type: Sequelize.BLOB,
+      },
+      inspection: {
+        type: Sequelize.BLOB,
+      },
+      vehiclePictures: {
+        type: Sequelize.JSON,
       },
       createdAt: {
         allowNull: false,
@@ -29,11 +32,10 @@ module.exports = {
       },
     });
 
-    // Define foreign keys for the one-to-one relationships
-    await queryInterface.addConstraint('documentDetails', {
+    await queryInterface.addConstraint('vehicleImages', {
       fields: ['vehicle_id'],
       type: 'foreign key',
-      name: 'fk_vehicle_id',
+      name: 'fk_vehicle_images_id',
       references: {
         table: 'vehicles',
         field: 'id',
@@ -44,10 +46,10 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    // Remove foreign keys first
-    await queryInterface.removeConstraint('documentDetails', 'fk_vehicle_id');
-
-    // Drop the documentDetails table
-    await queryInterface.dropTable('documentDetails');
+    await queryInterface.removeConstraint(
+      'vehicleImages',
+      'fk_vehicle_images_id'
+    );
+    await queryInterface.dropTable('vehicleImages');
   },
 };

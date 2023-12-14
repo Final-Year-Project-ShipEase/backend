@@ -31,6 +31,9 @@ module.exports = {
       date: {
         type: Sequelize.DATE,
       },
+      total_bill: {
+        type: Sequelize.INTEGER,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

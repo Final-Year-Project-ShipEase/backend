@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const Broadcast = sequelize.define('broadcast', {
+  const Broadcast = sequelize.define('broadcasts', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -15,10 +15,10 @@ module.exports = (sequelize) => {
       type: DataTypes.JSON,
     },
     date: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
     phoneNo: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     status: {
       type: DataTypes.ENUM('Active', 'Inactive'),

@@ -1,6 +1,12 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const VehicleApproval = sequelize.define('vehicleApproval', {
+  const VehicleApproval = sequelize.define('vehicleApprovals', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
     vehicle_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -10,19 +16,15 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    user_id: {
+    admin_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    premission: {
+    permission: {
       type: DataTypes.ENUM('approved', 'rejected'),
     },
     status: {
       type: DataTypes.ENUM('active', 'closed'),
-    },
-    admin_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
   });
 

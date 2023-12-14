@@ -1,17 +1,17 @@
 const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
-  const DriverApproval = sequelize.define('driverApproval', {
-    driver_id: {
+  const DriverApproval = sequelize.define('driverApprovals', {
+    id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
       allowNull: false,
-      unique: true,
     },
-    tenant_id: {
+    driver_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    user_id: {
+    tenant_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    premission: {
+    permission: {
       type: DataTypes.ENUM('approved', 'rejected'),
     },
     status: {
@@ -32,5 +32,6 @@ module.exports = (sequelize) => {
     DriverApproval.belongsTo(models.Admin, { foreignKey: 'admin_id' });
     DriverApproval.belongsTo(models.Tenant, { foreignKey: 'tenant_id' });
   };
+
   return DriverApproval;
 };

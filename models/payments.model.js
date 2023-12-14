@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     date: {
-      type: DataTypes.TIMESTAMP,
+      type: DataTypes.DATE,
     },
     total: {
       type: DataTypes.INTEGER,
