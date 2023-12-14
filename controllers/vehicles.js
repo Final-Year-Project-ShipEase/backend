@@ -253,4 +253,5 @@ module.exports = {
   getVehicleApprovalsForVehicleWithPagination,
   getVehicleImagesForVehicleWithPagination,
   getTenantForVehicleById,
+  getVehicleDetailsForVehicleWithPagination,
 };

@@ -41,7 +41,6 @@ pool.connect((err, client, release) => {
   release();
 });
 
-
 app.use(cors());
 app.use(express.json());
 app.use(admin);
