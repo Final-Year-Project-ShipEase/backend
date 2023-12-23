@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const secretKey = 'SHIPEASE'; 
-const expiresIn = '1h'; 
-const {Tenant} = require('../models');
+const secretKey = 'SHIPEASE';
+const expiresIn = '1h';
+const { Tenant } = require('../models');
 
 exports.createAccessToken = async (req, res) => {
   const { username, password } = req.body;
