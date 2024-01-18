@@ -1,39 +1,56 @@
 const jwt = require('jsonwebtoken');
 
 const secretKey = 'SHIPEASE';
-const expiresIn = '1h';
+const accessExpiresIn = '2m';
+const refreshExpiresIn = '30d'; // Longer expiration time for refresh token
 const { Tenant } = require('../models');
+
+const createTokens = async (tenant) => {
+  const accessToken = jwt.sign(
+    { id: tenant.id, username: tenant.username },
+    secretKey,
+    { expiresIn: accessExpiresIn }
+  );
+
+  const refreshToken = jwt.sign(
+    { id: tenant.id, username: tenant.username },
+    secretKey,
+    { expiresIn: refreshExpiresIn }
+  );
+
+  return { accessToken, refreshToken };
+};
 
 exports.createAccessToken = async (req, res) => {
   const { username, password } = req.body;
   const tenant = await Tenant.findOne({
     where: {
       username,
-      password, 
+      password,
     },
   });
+
   if (tenant) {
-    const accessToken = jwt.sign(
-      { id: this.id, username: this.username },
-      secretKey,
-      { expiresIn }
-    );
-    res.json({ accessToken });
+    const { accessToken, refreshToken } = await createTokens(tenant);
+    res.json({ accessToken, refreshToken });
   } else {
     res.status(401).json({ error: 'Invalid credentials' });
   }
 };
 
-exports.getAccessToken = async (req, res) => {
-  const token = req.headers.authorization.split(' ')[1];
-  try {
-    const decodedToken = jwt.verify(token, secretKey);
+exports.refreshAccessToken = async (req, res) => {
+  const { refreshToken } = req.body;
 
-    res.json({
-      message: 'Tenant protected resource accessed successfully',
-      decodedToken,
+  try {
+    const decodedToken = jwt.verify(refreshToken, secretKey);
+    console.log(decodedToken);
+    const { accessToken, refreshToken: newRefreshToken } = await createTokens({
+      id: decodedToken.id,
+      username: decodedToken.username,
     });
+
+    res.json({ accessToken, refreshToken: newRefreshToken });
   } catch (error) {
-    res.status(401).json({ error: 'Invalid or expired token' });
+    res.status(401).json({ error: 'Invalid or expired refresh token' });
   }
 };
