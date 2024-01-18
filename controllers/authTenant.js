@@ -6,7 +6,12 @@ const { Tenant } = require('../models');
 
 exports.createAccessToken = async (req, res) => {
   const { username, password } = req.body;
-  const tenant = await Tenant.findOne({ where: { username, password } });
+  const tenant = await Tenant.findOne({
+    where: {
+      username,
+      password, 
+    },
+  });
   if (tenant) {
     const accessToken = jwt.sign(
       { id: this.id, username: this.username },
