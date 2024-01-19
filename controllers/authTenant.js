@@ -57,3 +57,19 @@ exports.refreshAccessToken = async (req, res) => {
     res.status(401).json({ error: 'Invalid or expired refresh token' });
   }
 };
+
+exports.verifyAccessToken = async (req, res, next) => {
+  const { authorization } = req.headers;
+  if (authorization) {
+    const token = authorization.split(' ')[1];
+    try {
+      const decodedToken = jwt.verify(token, secretKey);
+      req.tenant = decodedToken;
+      res.status(200).json({ success: 'Valid access token' });
+    } catch (error) {
+      res.status(401).json({ error: 'Invalid or expired access token' });
+    }
+  } else {
+    res.status(401).json({ error: 'No access token provided' });
+  }
+};
