@@ -32,7 +32,10 @@ exports.createAccessToken = async (req, res) => {
 
   if (tenant) {
     const { accessToken, refreshToken } = await createTokens(tenant);
-    res.json({ accessToken, refreshToken });
+    tenant.refreshToken = refreshToken;
+    await tenant.save();
+    tenant.token = accessToken;
+    res.json({ tenant });
   } else {
     res.status(401).json({ error: 'Invalid credentials' });
   }

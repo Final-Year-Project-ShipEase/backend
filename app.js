@@ -43,9 +43,9 @@ pool.connect((err, client, release) => {
 
 app.use(cors());
 app.use(express.json());
+app.use(authAdmin);
 app.use(admin);
 app.use(user);
-app.use(tenant);
 app.use(driver);
 app.use(driverAppproval);
 app.use(driverLicenseImage);
@@ -55,8 +55,8 @@ app.use(vehicleImage);
 app.use(chat);
 app.use(broadcast);
 app.use(promotion);
-app.use(authAdmin);
 app.use(authTenant);
+app.use(tenant);
 
 // Start the server
 app.listen(port, () => {
