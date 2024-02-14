@@ -2,9 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const tenantController = require('../controllers/tenant');
-const { verifyAccessToken } = require('../middleware/tenantProtectedRoute');
 
-router.use(verifyAccessToken);
 router.get('/tenants', tenantController.getAllTenants);
 router.get('/tenant/:id', tenantController.getTenantById);
 router.post('/tenant', tenantController.createTenant);

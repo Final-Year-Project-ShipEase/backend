@@ -19,6 +19,7 @@ const broadcast = require('./routes/broadcasts');
 const promotion = require('./routes/promotion');
 const authAdmin = require('./routes/authAdmin');
 const authTenant = require('./routes/authTenant');
+const { verifyAccessToken } = require('./middleware/tenantProtectedRoute');
 
 const app = express();
 const port = process.env.BACKEND_PORT || 3000;
@@ -44,7 +45,9 @@ pool.connect((err, client, release) => {
 app.use(cors());
 app.use(express.json());
 app.use(authAdmin);
-app.use(admin);
+app.use(authTenant);
+
+app.use(verifyAccessToken);
 app.use(user);
 app.use(driver);
 app.use(driverAppproval);
@@ -55,8 +58,10 @@ app.use(vehicleImage);
 app.use(chat);
 app.use(broadcast);
 app.use(promotion);
-app.use(authTenant);
+
+app.use(admin);
 app.use(tenant);
+
 
 // Start the server
 app.listen(port, () => {

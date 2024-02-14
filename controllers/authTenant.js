@@ -46,7 +46,6 @@ exports.refreshAccessToken = async (req, res) => {
 
   try {
     const decodedToken = jwt.verify(refreshToken, secretKey);
-    console.log(decodedToken);
     const { accessToken, refreshToken: newRefreshToken } = await createTokens({
       id: decodedToken.id,
       username: decodedToken.username,
