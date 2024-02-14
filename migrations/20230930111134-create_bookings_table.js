@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.JSON,
       },
       status: {
-        type: Sequelize.ENUM('active', 'completed', 'reserved'),
+        type: Sequelize.ENUM('active', 'completed', 'reserved','bid'),
       },
       date: {
         type: Sequelize.DATE,
