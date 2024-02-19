@@ -20,6 +20,7 @@ const promotion = require('./routes/promotion');
 const authAdmin = require('./routes/authAdmin');
 const authTenant = require('./routes/authTenant');
 const booking = require('./routes/bookings');
+const product = require('./routes/product');
 
 const app = express();
 const port = process.env.BACKEND_PORT || 3000;
@@ -59,6 +60,7 @@ app.use(promotion);
 app.use(authAdmin);
 app.use(authTenant);
 app.use(booking);
+app.use(product);
 
 // Start the server
 app.listen(port, () => {
