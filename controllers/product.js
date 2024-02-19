@@ -84,6 +84,20 @@ exports.deleteProductById = async (req, res) => {
         } 
         catch (error) { 
             res.status(500).json({ error: error.message }); 
-        } };
+        } 
+    };
 
-// Complete Index route with backend pagination of 10 results exports.getProductsWithPagination = async (req, res) => { const page = parseInt(req.query.page) || 1; const pageSize = 10; try { const { count, rows } = await Product.findAndCountAll({ limit: pageSize, offset: (page - 1) * pageSize, });
+// Complete Index route with backend pagination of 10 results 
+exports.getProductsWithPagination = async (req, res) => { 
+    const page = parseInt(req.query.page) || 1; const pageSize = 10; 
+    try { 
+        const { count, rows } = await Product.findAndCountAll({ 
+            limit: pageSize, offset: (page - 1) * pageSize, });
+        const paginationData = calculatePagination(count, pageSize, page);
+        res.json({ products: rows, pagination: paginationData });
+    }
+    catch (error)
+    {
+        res.status(500).json({ error: error.message }); 
+    }
+};
