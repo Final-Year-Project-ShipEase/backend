@@ -21,6 +21,7 @@ const authAdmin = require('./routes/authAdmin');
 const authTenant = require('./routes/authTenant');
 const booking = require('./routes/bookings');
 const product = require('./routes/product');
+const poolRequest = require('./routes/pool_requests');
 
 const app = express();
 const port = process.env.BACKEND_PORT || 3000;
@@ -61,6 +62,7 @@ app.use(authAdmin);
 app.use(authTenant);
 app.use(booking);
 app.use(product);
+app.use(poolRequest);
 
 // Start the server
 app.listen(port, () => {
