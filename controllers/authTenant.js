@@ -1,9 +1,16 @@
 const jwt = require('jsonwebtoken');
-
-const secretKey = 'SHIPEASE';
+const bcrypt = require('bcrypt');
 const accessExpiresIn = '2m';
-const refreshExpiresIn = '30d'; // Longer expiration time for refresh token
+const refreshExpiresIn = '1d';
 const { Tenant } = require('../models');
+const { env } = require('../utils/constants');
+const { api, handleErrorResponse } = require('../utils/helper');
+
+const getDataToSend = (tenant) => ({
+  id: tenant.id,
+  email: tenant.email,
+  role: 'tenant',
+});
 
 const createTokens = async (tenant) => {
   const accessToken = jwt.sign(
@@ -19,26 +26,6 @@ const createTokens = async (tenant) => {
   );
 
   return { accessToken, refreshToken };
-};
-
-exports.createAccessToken = async (req, res) => {
-  const { username, password } = req.body;
-  const tenant = await Tenant.findOne({
-    where: {
-      username,
-      password,
-    },
-  });
-
-  if (tenant) {
-    const { accessToken, refreshToken } = await createTokens(tenant);
-    tenant.refreshToken = refreshToken;
-    await tenant.save();
-    tenant.token = accessToken;
-    res.json({ tenant });
-  } else {
-    res.status(401).json({ error: 'Invalid credentials' });
-  }
 };
 
 exports.refreshAccessToken = async (req, res) => {
@@ -57,18 +44,60 @@ exports.refreshAccessToken = async (req, res) => {
   }
 };
 
+exports.login = async (req, res) => {
+  const { username, password } = req.body;
+  const tenant = await Tenant.findOne({
+    where: {
+      username,
+    },
+  });
+
+  if (!tenant || !(await bcrypt.compare(password, tenant.password))) {
+    return handleErrorResponse(res, 401, 'Invalid Credentials');
+  }
+
+  const token = jwt.sign(getDataToSend(tenant), env.JWT_SECRET_KEY, {
+    expiresIn: env.TOKEN_EXPIRATION,
+  });
+
+  tenant.token = token;
+  await tenant.save();
+  res.json({
+    success: true,
+    message: 'tenant logged in successfully',
+    data: { ...getDataToSend(tenant), token },
+  });
+};
+
 exports.verifyAccessToken = async (req, res, next) => {
-  const { authorization } = req.headers;
-  if (authorization) {
-    const token = authorization.split(' ')[1];
-    try {
-      const decodedToken = jwt.verify(token, secretKey);
-      req.tenant = decodedToken;
-      res.status(200).json({ success: 'Valid access token' });
-    } catch (error) {
-      res.status(401).json({ error: 'Invalid or expired access token' });
+  api(res, async () => {
+    const { token } = req.body;
+    const tenant = await Tenant.findOne({ where: { token } });
+    if (!tenant) return handleErrorResponse(res, 401, 'Invalid Token');
+
+    res.json({
+      success: true,
+      message: 'Valid Token',
+      data: { ...getDataToSend(tenant), token: tenant.token },
+    });
+  });
+};
+
+exports.updatePassword = async (req, res) => {
+  const { id, email } = req.user;
+  const { password } = req.body;
+  try {
+    const tenant = await Tenant.findByPk(id);
+    if (!tenant) {
+      return res.status(404).json({ error: 'Tenant not found' });
     }
-  } else {
-    res.status(401).json({ error: 'No access token provided' });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    tenant.password = hashedPassword;
+    await tenant.save();
+    res.json({ success: true, message: 'Password updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 };

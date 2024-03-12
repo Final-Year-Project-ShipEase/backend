@@ -1,5 +1,6 @@
 // controllers/tenantController.js
 const { Tenant } = require('../models');
+const bcrypt = require('bcrypt');
 
 const getAllTenants = async (req, res) => {
   try {
@@ -35,11 +36,12 @@ const createTenant = async (req, res) => {
     status,
   } = req.body;
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newTenant = await Tenant.create({
       username,
       name,
       email,
-      password,
+      password: hashedPassword,
       phoneNo,
       cities,
       permissions,
