@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const secretKey = 'SHIPEASE';
 const { Admin } = require('../models');
 const { env } = require("../utils/constants");
+const { api, handleErrorResponse } = require('../utils/helper');
 
 const getDataToSend = (admin) => ({
   id: admin.id,
@@ -63,7 +64,6 @@ exports.createAccessToken = async (req, res) => {
 
   admin.token = token;
   await admin.save();
-  admin.token = accessToken;
   res.json({ 
     success: true,
     message: 'Admin logged in successfully',
