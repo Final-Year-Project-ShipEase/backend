@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const chatController = require('../controllers/chats');
 
+module.exports = (app) => {
 router.get('/chats', chatController.getAllChats);
 router.get('/chat/:id', chatController.getChatById);
 router.post('/chat', chatController.createChat);
@@ -23,5 +24,4 @@ router.get(
   '/tenants/:tenant_id/chats/index',
   chatController.getChatsForTenantWithPagination
 );
-
-module.exports = router;
+}

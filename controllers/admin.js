@@ -1,5 +1,6 @@
 // controllers/adminController.js
 const { Admin } = require('../models');
+const bcrypt = require('bcrypt');
 
 exports.getAllAdmins = async (req, res) => {
   try {
@@ -27,10 +28,11 @@ exports.getAdminById = async (req, res) => {
 exports.createAdmin = async (req, res) => {
   const { name, email, password, username, data } = req.body;
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const newAdmin = await Admin.create({
       name,
       email,
-      password,
+      password: hashedPassword,
       username,
       data,
     });
@@ -45,8 +47,9 @@ exports.updateAdmin = async (req, res) => {
   const { name, email, password, username, data } = req.body;
   try {
     const admin = await Admin.findByPk(id);
+    const hashedPassword = await bcrypt.hash(password, 10);
     if (admin) {
-      await admin.update({ name, email, password, username, data });
+      await admin.update({ name, email, hashedPassword, username, data });
       res.json(admin);
     } else {
       res.status(404).json({ error: 'Admin not found' });
@@ -75,8 +78,8 @@ exports.deleteAdminById = async (req, res) => {
 exports.getUserData = async (req, res) => {
   const { username, password } = req.body;
   try {
-    const admin = await Admin.findOne({ where: { username, password } });
-    if (admin) {
+    const admin = await Admin.findOne({ where: { username} });
+    if (admin && (await bcrypt.compare(password, admin.password))) {
       res.json(admin);
     } else {
       res.status(404).json({ error: 'Invalid username or password' });
