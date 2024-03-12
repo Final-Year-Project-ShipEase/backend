@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       type: DataTypes.JSON,
     },
     status: {
-      type: DataTypes.ENUM('active', 'completed', 'reserved'),
+      type: DataTypes.ENUM('active', 'completed', 'reserved','bid'),
     },
     date: {
       type: DataTypes.DATE,

@@ -19,6 +19,9 @@ const broadcast = require('./routes/broadcasts');
 const promotion = require('./routes/promotion');
 const authAdmin = require('./routes/authAdmin');
 const authTenant = require('./routes/authTenant');
+const booking = require('./routes/bookings');
+const product = require('./routes/product');
+const poolRequest = require('./routes/pool_requests');
 const { verifyAccessToken } = require('./middleware/tenantProtectedRoute');
 
 const app = express();
@@ -62,6 +65,9 @@ app.use(promotion);
 app.use(admin);
 app.use(tenant);
 
+app.use(booking);
+app.use(product);
+app.use(poolRequest);
 
 // Start the server
 app.listen(port, () => {
