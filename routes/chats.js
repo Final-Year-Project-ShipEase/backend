@@ -24,4 +24,5 @@ router.get(
   '/tenants/:tenant_id/chats/index',
   chatController.getChatsForTenantWithPagination
 );
+app.use('/', router);
 }

@@ -28,4 +28,6 @@ module.exports = (app) => {
     '/vehicleApprovals/rejected',
     vehicleApprovalController.getRejectedVehicleApprovals
   );
+
+  app.use('/', router);
 };

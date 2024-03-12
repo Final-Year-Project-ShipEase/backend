@@ -11,4 +11,6 @@ module.exports = (app) => {
     '/vehicleImage/:id',
     vehicleImageController.deleteVehicleImageById
   );
+
+  app.use('/', router);
 };

@@ -9,4 +9,6 @@ module.exports = (app) => {
   router.post('/payment', paymentController.createPayment);
   router.put('/payment/:id', paymentController.updatePayment);
   router.delete('/payment/:id', paymentController.deletePaymentById);
+
+  app.use('/', router);
 };

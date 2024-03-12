@@ -9,4 +9,5 @@ router.get('/complaint/:id', complaintController.getComplaintById);
 router.post('/complaint', complaintController.createComplaint);
 router.put('/complaint/:id', complaintController.updateComplaint);
 router.delete('/complaint/:id', complaintController.deleteComplaintById);
+app.use('/', router);
 }

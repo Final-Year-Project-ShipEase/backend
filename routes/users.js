@@ -10,4 +10,6 @@ module.exports = (app) => {
   router.put('/user/:id', userController.updateUser);
   router.delete('user/:id', userController.deleteUserById);
   router.get('/users/index', userController.getUsersWithPagination);
+
+  app.use('/', router);
 };

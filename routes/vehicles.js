@@ -28,4 +28,6 @@ module.exports = (app) => {
     '/vehicles/:vehicle_id/vehicleImages/index',
     vehicleController.getVehicleImagesForVehicleWithPagination
   );
+
+  app.use('/', router);
 };

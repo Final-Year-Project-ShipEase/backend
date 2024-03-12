@@ -9,4 +9,6 @@ module.exports = (app) => {
   router.post('/review', reviewController.createReview);
   router.put('/review/:id', reviewController.updateReview);
   router.delete('/review/:id', reviewController.deleteReviewById);
+
+  app.use('/', router);
 };

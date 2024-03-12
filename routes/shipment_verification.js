@@ -24,4 +24,6 @@ module.exports = (app) => {
     '/shipmentVerification/:id',
     shipmentVerificationController.deleteShipmentById
   );
+
+  app.use('/', router);
 };

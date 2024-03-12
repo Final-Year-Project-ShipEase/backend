@@ -24,4 +24,5 @@ module.exports = (app) => {
     '/bookings/:booking_id/payments/index',
     bookingController.getPaymentsForBookingWithPagination
   );
+  app.use('/', router);
 };

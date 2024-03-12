@@ -30,4 +30,6 @@ module.exports = (app) => {
     '/drivers/:driver_id/driverLicenseImages/index',
     driverLicenseImagesController.getDriverLicenseImagesForDriverWithPagination
   );
+
+  app.use('/', router);
 };

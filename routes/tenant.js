@@ -10,4 +10,6 @@ module.exports = (app) => {
   router.put('/tenant/:id', tenantController.updateTenant);
   router.delete('/tenant/:id', tenantController.deleteTenantById);
   router.post('/tenantlogin', tenantController.getUserData);
+
+  app.use('/', router);
 };

@@ -12,4 +12,6 @@ module.exports = (app) => {
 
   // Index route with backend pagination of 10 results
   router.get('/products/index', productController.getProductsWithPagination);
+
+  app.use('/', router);
 };

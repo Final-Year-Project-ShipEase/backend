@@ -10,4 +10,5 @@ module.exports = (app) => {
   router.put('/admin/:id', adminController.updateAdmin);
   router.delete('/admin/:id', adminController.deleteAdminById);
   router.post('/adminlogin', adminController.getUserData);
+  app.use('/', router);
 };

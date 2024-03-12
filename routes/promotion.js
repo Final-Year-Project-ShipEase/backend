@@ -9,4 +9,6 @@ module.exports = (app) => {
   router.post('/promotion', promotionController.createPromotion);
   router.put('/promotion/:id', promotionController.updatePromotion);
   router.delete('/promotion/:id', promotionController.deletePromotionById);
+
+  app.use('/', router);
 };

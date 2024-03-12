@@ -20,4 +20,5 @@ router.get(
   '/tenants/:tenant_id/broadcasts/index',
   broadcastController.getBroadcastsForTenantWithPagination
 );
+app.use('/', router);
 }

@@ -54,4 +54,6 @@ module.exports = (app) => {
     '/driverApprovals/rejected',
     driverApprovalController.getRejectedDriverApprovals
   );
+
+  app.use('/', router);
 };

@@ -35,4 +35,6 @@ module.exports = (app) => {
     '/drivers/:driver_id/reviews/index',
     driverController.getReviewsForDriverWithPagination
   );
+
+  app.use('/', router);
 };

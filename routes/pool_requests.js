@@ -18,4 +18,6 @@ module.exports = (app) => {
     '/poolRequests/index',
     poolRequestController.getPoolRequestsWithPagination
   );
+
+  app.use('/', router);
 };
