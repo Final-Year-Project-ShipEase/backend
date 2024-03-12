@@ -46,7 +46,7 @@ exports.refreshAccessToken = async (req, res) => {
 };
 
 
-exports.createAccessToken = async (req, res) => {
+exports.login = async (req, res) => {
   const { username, password } = req.body;
   const admin = await Admin.findOne({
     where: {
@@ -55,21 +55,20 @@ exports.createAccessToken = async (req, res) => {
   });
 
   if (!admin || !(await bcrypt.compare(password, admin.password))) {
-    return handleErrorResponse(res, 401, "Invalid Credentials");
+    return handleErrorResponse(res, 401, 'Invalid Credentials');
   }
 
   const token = jwt.sign(getDataToSend(admin), env.JWT_SECRET_KEY, {
-    expiresIn: env.TOKEN_EXPIRATION
+    expiresIn: env.TOKEN_EXPIRATION,
   });
 
   admin.token = token;
   await admin.save();
-  res.json({ 
+  res.json({
     success: true,
     message: 'Admin logged in successfully',
-    data: {...getDataToSend(admin), token}
-   });
-  
+    data: { ...getDataToSend(admin), token },
+  });
 };
 
 exports.verifyAccessToken = async (req, res, next) => {
