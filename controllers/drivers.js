@@ -39,7 +39,7 @@ exports.getDriverById = async (req, res) => {
 };
 
 exports.createDriver = async (req, res) => {
-  const { tenant_id, name, password, phoneNo, status, city, cnic, trackerNo } =
+  const { tenant_id, name,password, cnic, status, city, phoneNo, trackerNo } =
     req.body;
   try {
     // Create a new driver with the provided data
