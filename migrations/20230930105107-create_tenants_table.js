@@ -36,6 +36,12 @@ module.exports = {
       status: {
         type: Sequelize.ENUM('active', 'inactive'),
       },
+      token: {
+        type: Sequelize.STRING,
+      },
+      refreshToken: {
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

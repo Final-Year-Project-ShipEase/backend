@@ -76,9 +76,9 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.removeConstraint('vehicleApprovals', 'fk_driver_id');
-    await queryInterface.removeConstraint('vehicleApprovals', 'fk_tenant_id');
-    await queryInterface.removeConstraint('vehicleApprovals', 'fk_admin_id');
+    await queryInterface.removeConstraint('vehicleApprovals1', 'fk_driver_id');
+    await queryInterface.removeConstraint('vehicleApprovals2', 'fk_tenant_id');
+    await queryInterface.removeConstraint('vehicleApprovals3', 'fk_admin_id');
     await queryInterface.dropTable('vehicleApprovals');
   },
 };
