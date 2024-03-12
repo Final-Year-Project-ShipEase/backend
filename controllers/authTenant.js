@@ -87,7 +87,7 @@ exports.updatePassword = async (req, res) => {
   const { id, email } = req.user;
   const { password } = req.body;
   try {
-    const tenant = await Tenant.findByPk(id);
+    const tenant = await Tenant.findOne({ where: { id, email } });
     if (!tenant) {
       return res.status(404).json({ error: 'Tenant not found' });
     }
