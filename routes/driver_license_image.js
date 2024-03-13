@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const driverLicenseImagesController = require('../controllers/driver_license_images');
+const TokenValidator = require('../middleware/tokenValidator');
 
 module.exports = (app) => {
   router.get(
@@ -14,14 +15,17 @@ module.exports = (app) => {
   );
   router.post(
     '/driverLicenseImage',
+    TokenValidator,
     driverLicenseImagesController.createDriverLicenseImages
   );
   router.put(
     '/driverLicenseImage/:driver_id',
+    TokenValidator,
     driverLicenseImagesController.updateDriverLicenseImages
   );
   router.delete(
     '/driverLicenseImage/:driver_id',
+    TokenValidator,
     driverLicenseImagesController.deleteDriverLicenseImagesById
   );
 

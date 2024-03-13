@@ -45,6 +45,12 @@ exports.createAdmin = async (req, res) => {
 exports.updateAdmin = async (req, res) => {
   const { id } = req.params;
   const { name, email, password, username, data } = req.body;
+  const { role } = req.user;
+
+  if (role != 'admin') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Admin');
+  }
+
   try {
     const admin = await Admin.findByPk(id);
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -61,6 +67,11 @@ exports.updateAdmin = async (req, res) => {
 
 exports.deleteAdminById = async (req, res) => {
   const { id } = req.params;
+  const { role } = req.user;
+
+  if (role != 'admin') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Admin');
+  }
   try {
     const admin = await Admin.findByPk(id);
     if (admin) {

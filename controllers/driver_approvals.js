@@ -40,6 +40,11 @@ exports.getDriverApprovalById = async (req, res) => {
 
 exports.createDriverApproval = async (req, res) => {
   const { driver_id, tenant_id, admin_id, permission, status } = req.body;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const newDriverApproval = await DriverApproval.create({
       driver_id,
@@ -58,6 +63,11 @@ exports.createDriverApproval = async (req, res) => {
 exports.updateDriverApproval = async (req, res) => {
   const { driver_id } = req.params;
   const { tenant_id, admin_id, permission, status } = req.body;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const driverApproval = await DriverApproval.findByPk(driver_id);
     if (driverApproval) {
@@ -73,6 +83,11 @@ exports.updateDriverApproval = async (req, res) => {
 
 exports.deleteDriverApprovalById = async (req, res) => {
   const { driver_id } = req.params;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const driverApproval = await DriverApproval.findByPk(driver_id);
     if (driverApproval) {

@@ -87,8 +87,13 @@ exports.verifyAccessToken = async (req, res, next) => {
 
 exports.updatePassword = async (req, res) => {
   api(res, async () => {
-    const { id, email } = req.user;
+    const { id, email, role } = req.user;
     const { password } = req.body;
+
+    if (role != 'admin') {
+      return handleErrorResponse(res, 401, 'Token is not valid for Admin');
+    }
+
     const admin = await Admin.findOne({ where: { id, email } });
     if (!admin) return handleErrorResponse(res, 404, "User Not Found");
 

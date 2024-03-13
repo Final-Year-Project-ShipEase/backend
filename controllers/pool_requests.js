@@ -40,6 +40,11 @@ exports.getPoolRequestById = async (req, res) => {
 
 exports.createPoolRequest = async (req, res) => {
   const { booking_id, types, city, destination, startDate, endDate } = req.body;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const newPoolRequest = await PoolRequest.create({
       booking_id,
@@ -58,6 +63,11 @@ exports.createPoolRequest = async (req, res) => {
 exports.updatePoolRequest = async (req, res) => {
   const { id } = req.params;
   const { booking_id, types, city, destination, startDate, endDate } = req.body;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const poolRequest = await PoolRequest.findByPk(id);
     if (poolRequest) {
@@ -80,6 +90,11 @@ exports.updatePoolRequest = async (req, res) => {
 
 exports.deletePoolRequestById = async (req, res) => {
   const { id } = req.params;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const poolRequest = await PoolRequest.findByPk(id);
     if (poolRequest) {
