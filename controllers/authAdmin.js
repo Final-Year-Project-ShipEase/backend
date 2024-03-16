@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const secretKey = 'SHIPEASE';
 const { Admin } = require('../models');
-const { env } = require("../utils/constants");
+const { env } = require('../utils/constants');
 const { api, handleErrorResponse } = require('../utils/helper');
 
 const getDataToSend = (admin) => ({
@@ -10,6 +9,8 @@ const getDataToSend = (admin) => ({
   email: admin.email,
   role: 'admin',
 });
+
+const secretKey = env.JWT_SECRET_KEY;
 
 // TODO: Create Tokens
 const createTokens = async (admin) => {
@@ -45,7 +46,6 @@ exports.refreshAccessToken = async (req, res) => {
   }
 };
 
-
 exports.login = async (req, res) => {
   const { username, password } = req.body;
   const admin = await Admin.findOne({
@@ -73,14 +73,16 @@ exports.login = async (req, res) => {
 
 exports.verifyAccessToken = async (req, res, next) => {
   api(res, async () => {
-    const { token } = req.body;
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return handleErrorResponse(res, 401, 'Token is required');
+
     const admin = await Admin.findOne({ where: { token } });
-    if (!admin) return handleErrorResponse(res, 401, "Invalid Token");
+    if (!admin) return handleErrorResponse(res, 401, 'Invalid Token');
 
     res.json({
       success: true,
-      message: "Valid Token",
-      data: { ...getDataToSend(admin), token: admin.token }
+      message: 'Valid Token',
+      data: { ...getDataToSend(admin), token: admin.token },
     });
   });
 };

@@ -12,11 +12,7 @@ module.exports = (app) => {
     RequestValidator(Schema.login),
     authAdminController.login
   );
-  router.get(
-    '/verify',
-    RequestValidator(Schema.validateToken),
-    authAdminController.verifyAccessToken
-  );
+  router.get('/verify', authAdminController.verifyAccessToken);
   router.post(
     '/updatepassword',
     RequestValidator(Schema.updatePassword),

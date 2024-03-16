@@ -12,11 +12,7 @@ module.exports = (app) => {
     authTenantController.login
   );
   router.get('/refresh', authTenantController.refreshAccessToken);
-  router.get(
-    '/verify',
-    RequestValidator(Schema.validateToken),
-    authTenantController.verifyAccessToken
-  );
+  router.get('/verify', authTenantController.verifyAccessToken);
   router.post(
     '/updatepassword',
     RequestValidator(Schema.updatePassword),

@@ -5,16 +5,11 @@ const login = Joi.object({
   password: Joi.string().required(),
 });
 
-const validateToken = Joi.object({
-  token: Joi.string().required(),
-});
-
 const updatePassword = Joi.object({
   password: Joi.string().required(),
 });
 
 module.exports = {
   login,
-  validateToken,
   updatePassword,
 };

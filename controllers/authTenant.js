@@ -71,7 +71,9 @@ exports.login = async (req, res) => {
 
 exports.verifyAccessToken = async (req, res, next) => {
   api(res, async () => {
-    const { token } = req.body;
+    const token = req.headers.authorization?.split(' ')[1]; 
+    if (!token) return handleErrorResponse(res, 401, 'Token is required');
+    
     const tenant = await Tenant.findOne({ where: { token } });
     if (!tenant) return handleErrorResponse(res, 401, 'Invalid Token');
 
@@ -82,6 +84,7 @@ exports.verifyAccessToken = async (req, res, next) => {
     });
   });
 };
+
 
 exports.updatePassword = async (req, res) => {
   const { id, email } = req.user;
