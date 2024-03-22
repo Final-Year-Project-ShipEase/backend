@@ -36,6 +36,14 @@ module.exports = (sequelize) => {
     status: {
       type: DataTypes.ENUM('active', 'inactive'),
     },
+    token: {
+      type: DataTypes.STRING, 
+      allowNull: true, 
+    },
+    refreshToken: {
+      type: DataTypes.STRING, 
+      allowNull: true, 
+    },
   });
 
   Tenant.associate = (models) => {

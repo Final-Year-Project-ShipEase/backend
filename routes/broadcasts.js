@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const broadcastController = require('../controllers/broadcasts');
-
+module.exports = (app) => {
 router.get('/broadcasts', broadcastController.getAllBroadcasts);
 router.get('/broadcast/:id', broadcastController.getBroadcastById);
 router.post('/broadcast', broadcastController.createBroadcast);
@@ -20,5 +20,5 @@ router.get(
   '/tenants/:tenant_id/broadcasts/index',
   broadcastController.getBroadcastsForTenantWithPagination
 );
-
-module.exports = router;
+app.use('/', router);
+}

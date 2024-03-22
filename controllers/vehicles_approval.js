@@ -3,6 +3,11 @@ const { VehicleApproval } = require('../models');
 // Create a new vehicle approval
 const createVehicleApproval = async (req, res) => {
   try {
+    const { role } = req.user;
+
+    if (role != 'tenant') {
+      return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+    }
     const vehicleApproval = await VehicleApproval.create(req.body);
     return res.status(201).json(vehicleApproval);
   } catch (error) {
@@ -37,6 +42,11 @@ const getVehicleApprovalById = async (req, res) => {
 // Update vehicle approval by ID
 const updateVehicleApproval = async (req, res) => {
   const vehicleApprovalId = req.params.id;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const [updatedRows] = await VehicleApproval.update(req.body, {
       where: { id: vehicleApprovalId },
@@ -56,6 +66,11 @@ const updateVehicleApproval = async (req, res) => {
 // Delete vehicle approval by ID
 const deleteVehicleApprovalById = async (req, res) => {
   const vehicleApprovalId = req.params.id;
+  const { role } = req.user;
+
+  if (role != 'tenant') {
+    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  }
   try {
     const deletedRows = await VehicleApproval.destroy({
       where: { id: vehicleApprovalId },

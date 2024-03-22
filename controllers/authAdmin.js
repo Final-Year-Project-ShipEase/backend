@@ -1,30 +1,107 @@
 const jwt = require('jsonwebtoken');
-
-const secretKey = 'SHIPEASE';
-const expiresIn = '1h';
+const bcrypt = require('bcrypt');
 const { Admin } = require('../models');
+const { env } = require('../utils/constants');
+const { api, handleErrorResponse } = require('../utils/helper');
 
-exports.createAccessToken = async (req, res) => {
-  const { username, password } = req.body;
-  const admin = await Admin.findOne({ where: { username, password } });
-  if (admin) {
-    const accessToken = jwt.sign(
-      { id: this.id, username: this.username },
-      secretKey,
-      { expiresIn }
-    );
-    res.json({ accessToken });
-  } else {
-    res.status(401).json({ error: 'Invalid credentials' });
-  }
+const getDataToSend = (admin) => ({
+  id: admin.id,
+  email: admin.email,
+  role: 'admin',
+});
+
+const secretKey = env.JWT_SECRET_KEY;
+
+// TODO: Create Tokens
+const createTokens = async (admin) => {
+  const accessToken = jwt.sign(
+    { id: admin.id, username: admin.username },
+    secretKey,
+    { expiresIn: accessExpiresIn }
+  );
+
+  const refreshToken = jwt.sign(
+    { id: admin.id, username: admin.username },
+    secretKey,
+    { expiresIn: refreshExpiresIn }
+  );
+
+  return { accessToken, refreshToken };
 };
 
-exports.getAccessToken = async (req, res) => {
-  const token = req.headers.authorization.split(' ')[1];
+// TODO: Refresh Token
+exports.refreshAccessToken = async (req, res) => {
+  const { refreshToken } = req.body;
+
   try {
-    const decodedToken = jwt.verify(token, secretKey);
-    res.json({ message: 'Token is Valid', decodedToken });
+    const decodedToken = jwt.verify(refreshToken, secretKey);
+    const { accessToken, refreshToken } = await createTokens({
+      id: decodedToken.id,
+      username: decodedToken.username,
+    });
+
+    res.json({ accessToken, refreshToken });
   } catch (error) {
-    res.status(401).json({ error: 'Invalid or expired token' });
+    res.status(401).json({ error: 'Invalid or expired refresh token' });
   }
 };
+
+exports.login = async (req, res) => {
+  const { username, password } = req.body;
+  const admin = await Admin.findOne({
+    where: {
+      username,
+    },
+  });
+
+  if (!admin || !(await bcrypt.compare(password, admin.password))) {
+    return handleErrorResponse(res, 401, 'Invalid Credentials');
+  }
+
+  const token = jwt.sign(getDataToSend(admin), env.JWT_SECRET_KEY, {
+    expiresIn: env.TOKEN_EXPIRATION,
+  });
+
+  admin.token = token;
+  await admin.save();
+  res.json({
+    success: true,
+    message: 'Admin logged in successfully',
+    data: { ...getDataToSend(admin), token },
+  });
+};
+
+exports.verifyAccessToken = async (req, res, next) => {
+  api(res, async () => {
+    const token = req.headers.authorization?.split(' ')[1];
+    if (!token) return handleErrorResponse(res, 401, 'Token is required');
+
+    const admin = await Admin.findOne({ where: { token } });
+    if (!admin) return handleErrorResponse(res, 401, 'Invalid Token');
+
+    res.json({
+      success: true,
+      message: 'Valid Token',
+      data: { ...getDataToSend(admin), token: admin.token },
+    });
+  });
+};
+
+exports.updatePassword = async (req, res) => {
+  api(res, async () => {
+    const { id, email, role } = req.user;
+    const { password } = req.body;
+
+    if (role != 'admin') {
+      return handleErrorResponse(res, 401, 'Token is not valid for Admin');
+    }
+
+    const admin = await Admin.findOne({ where: { id, email } });
+    if (!admin) return handleErrorResponse(res, 404, "User Not Found");
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    admin.password = hashedPassword;
+    await admin.save();
+    res.json({ success: true, message: "Password has been Updated" });
+  });
+}
