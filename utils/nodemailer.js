@@ -6,13 +6,13 @@ const transporter = nodemailer.createTransport({
   port: 587,
   secure: false,
   auth: {
-    user: 'f200204@cfd.nu.edu.com',
+    user: 'f200204@cfd.nu.edu.pk',
     pass: 'Abdullah.309',
   },
 });
 const sendEmail = (userData, otp, res) => {
   const mailOptions = {
-    from: '"SHIPEASE" <f200204@cfd.nu.edu.com>',
+    from: '"SHIPEASE" <f200204@cfd.nu.edu.pk>',
     to: userData.email,
     subject: 'OTP for Registration',
     text: `Your OTP for registration is ${otp}`,

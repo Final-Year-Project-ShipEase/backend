@@ -67,13 +67,13 @@ exports.createUser = async (req, res) => {
     });
 
     // Attempt to send an email to the user
-    // try {
-    //   await sendEmail({ email: newUser.email }, otp); // Assuming sendEmail is properly defined to handle this
-    //   // Consider storing the OTP in your database associated with the user for verification later
-    // } catch (emailError) {
-    //   console.error(emailError);
-    //   // Optionally, handle email send failure (log it, retry, etc.)
-    // }
+    try {
+      await sendEmail({ email: newUser.email }, otp); // Assuming sendEmail is properly defined to handle this
+      // Consider storing the OTP in your database associated with the user for verification later
+    } catch (emailError) {
+      console.error(emailError);
+      // Optionally, handle email send failure (log it, retry, etc.)
+    }
 
     // Respond with the newly created user
     // Exclude sensitive information from the response, e.g., hashed password
