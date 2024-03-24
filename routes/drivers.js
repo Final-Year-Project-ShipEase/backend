@@ -36,5 +36,7 @@ module.exports = (app) => {
     driverController.getReviewsForDriverWithPagination
   );
 
+  router.post('/driver/login', driverController.login);
+
   app.use('/', router);
 };

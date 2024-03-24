@@ -1,5 +1,6 @@
 // controllers/driverController.js
 const { Driver, Vehicle, ShipmentVerification, Review } = require('../models');
+const bcrypt = require('bcrypt');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -39,14 +40,29 @@ exports.getDriverById = async (req, res) => {
 };
 
 exports.createDriver = async (req, res) => {
-  const { tenant_id, name,password, cnic, status, city, phoneNo, trackerNo } =
+  const { tenant_id, name, password, cnic, status, city, phoneNo, trackerNo } =
     req.body;
   try {
+    // Check if the driver already exists
+    const driverExists = await Driver.findOne({ where: { name } });
+    if (driverExists) {
+      return res.status(400).json({ error: 'Driver already exists' });
+    }
+
+    // check phone number already exists
+    const phoneNoExists = await Driver.findOne({ where: { phoneNo } });
+    if (phoneNoExists) {
+      return res.status(400).json({ error: 'Phone number already exists' });
+    }
+
+    // hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create a new driver with the provided data
     const newDriver = await Driver.create({
       tenant_id,
       name,
-      password,
+      password: hashedPassword,
       phoneNo,
       status,
       city,
@@ -192,6 +208,22 @@ exports.getReviewsForDriverWithPagination = async (req, res) => {
     const paginationData = calculatePagination(count, pageSize, page);
 
     res.json({ reviews: rows, pagination: paginationData });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.login = async (req, res) => {
+  const { name, password } = req.body;
+
+  try {
+    const driver = await Driver.findOne({ where: { name } });
+
+    if (driver && (await bcrypt.compare(password, driver.password))) {
+      res.json(driver);
+    } else {
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

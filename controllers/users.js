@@ -67,13 +67,13 @@ exports.createUser = async (req, res) => {
     });
 
     // Attempt to send an email to the user
-    try {
-      await sendEmail({ email: newUser.email }, otp); // Assuming sendEmail is properly defined to handle this
-      // Consider storing the OTP in your database associated with the user for verification later
-    } catch (emailError) {
-      console.error(emailError);
-      // Optionally, handle email send failure (log it, retry, etc.)
-    }
+    // try {
+    //   await sendEmail({ email: newUser.email }, otp); // Assuming sendEmail is properly defined to handle this
+    //   // Consider storing the OTP in your database associated with the user for verification later
+    // } catch (emailError) {
+    //   console.error(emailError);
+    //   // Optionally, handle email send failure (log it, retry, etc.)
+    // }
 
     // Respond with the newly created user
     // Exclude sensitive information from the response, e.g., hashed password
@@ -91,7 +91,6 @@ exports.createUser = async (req, res) => {
     res.status(500).json({ error: 'An unexpected error occurred.' });
   }
 };
-
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
@@ -137,6 +136,20 @@ exports.getUsersWithPagination = async (req, res) => {
     const paginationData = calculatePagination(count, pageSize, page);
 
     res.json({ users: rows, pagination: paginationData });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ where: { email } });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.json(user);
+    }
+    res.status(401).json({ error: 'Invalid email or password' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

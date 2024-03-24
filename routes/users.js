@@ -10,6 +10,7 @@ module.exports = (app) => {
   router.put('/user/:id', userController.updateUser);
   router.delete('user/:id', userController.deleteUserById);
   router.get('/users/index', userController.getUsersWithPagination);
+  router.post('/user/login', userController.login);
 
   app.use('/', router);
 };
