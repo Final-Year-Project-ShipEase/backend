@@ -1,5 +1,7 @@
 // controllers/userController.js
 const { User } = require('../models');
+const bcrypt = require('bcrypt');
+const { sendEmail } = require('../utils/nodemailer');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -40,20 +42,56 @@ exports.getUserById = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   const { username, name, email, password, phoneNo, city } = req.body;
+
   try {
+    const userExists = await User.findOne({ where: { email } });
+    if (userExists) {
+      return res.status(400).json({ error: 'User already exists' });
+    }
+
+    const usernameExists = await User.findOne({ where: { username } });
+    if (usernameExists) {
+      return res.status(400).json({ error: 'Username already exists' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const otp = Math.floor(1000 + Math.random() * 9000); // Generates a 4-digit OTP
+
     const newUser = await User.create({
       username,
       name,
       email,
-      password,
+      password: hashedPassword,
       phoneNo,
       city,
     });
-    res.status(201).json(newUser);
+
+    // Attempt to send an email to the user
+    try {
+      await sendEmail({ email: newUser.email }, otp); // Assuming sendEmail is properly defined to handle this
+      // Consider storing the OTP in your database associated with the user for verification later
+    } catch (emailError) {
+      console.error(emailError);
+      // Optionally, handle email send failure (log it, retry, etc.)
+    }
+
+    // Respond with the newly created user
+    // Exclude sensitive information from the response, e.g., hashed password
+    const userResponse = {
+      id: newUser.id,
+      username: newUser.username,
+      name: newUser.name,
+      email: newUser.email,
+      phoneNo: newUser.phoneNo,
+      city: newUser.city,
+    };
+    res.status(201).json(userResponse);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: 'An unexpected error occurred.' });
   }
 };
+
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
