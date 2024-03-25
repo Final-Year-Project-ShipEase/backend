@@ -16,11 +16,8 @@ module.exports = {
     dialect: process.env.DB_DIALECT,
   },
   production: {
-    host: 'ec2-107-21-67-46.compute-1.amazonaws.com',
-    database: 'df6mttapos0aml',
-    username: 'aytubncgvakpug',
-    password:
-      'a2ad2ad7cc2c0987fd91ea6425df212f5517302d2cac229411897c02bcf5efc0',
+    // heroku config vars for production
+    use_env_variable: process.env.DATABASE_URL,
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {
