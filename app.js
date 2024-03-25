@@ -31,6 +31,6 @@ validateRequiredEnvVars(process.env);
   }
 })();
 
-const port = process.env.BACKEND_PORT || 12345;
+const port = process.env.BACKEND_PORT || 3000;
 
 app.listen(port, () => print(`Server is Running at Port: ${port}`));
