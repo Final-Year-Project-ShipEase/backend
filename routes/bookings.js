@@ -6,6 +6,10 @@ const bookingController = require('../controllers/bookings');
 module.exports = (app) => {
   router.get('/bookings', bookingController.getAllBookings);
   router.get('/booking/:id', bookingController.getBookingById);
+  router.get(
+    '/booking/tenant/:tenant_id',
+    bookingController.getBookingsByTenantId
+  );
   router.post('/booking', bookingController.createBooking);
   router.put('/booking/:id', bookingController.updateBooking);
   router.delete('/booking/:id', bookingController.deleteBookingById);

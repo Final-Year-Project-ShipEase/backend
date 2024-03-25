@@ -9,7 +9,7 @@ module.exports = (app) => {
   router.get('/poolRequest/:id', poolRequestController.getPoolRequestById);
   router.post(
     '/poolRequest',
-    TokenValidator,
+    // TokenValidator,
     poolRequestController.createPoolRequest
   );
   router.put(
@@ -19,7 +19,7 @@ module.exports = (app) => {
   );
   router.delete(
     '/poolRequest/:id',
-    TokenValidator,
+    // TokenValidator,
     poolRequestController.deletePoolRequestById
   );
 
