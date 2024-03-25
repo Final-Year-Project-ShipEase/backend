@@ -16,9 +16,10 @@ module.exports = {
     dialect: process.env.DB_DIALECT,
   },
   production: {
-    use_env_variable: process.env.DATABASE_URL,
-    dialect: process.env.DB_DIALECT,
-    protocol: process.env.DB_DIALECT,
+    // heroku config vars for production
+    use_env_variable: DATABASE_URL,
+    dialect: 'postgres',
+    protocol: 'postgres',
     dialectOptions: {
       ssl: {
         require: true,
