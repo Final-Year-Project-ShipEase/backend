@@ -8,7 +8,7 @@ const requiredEnvVariables = [
   "DB_PASSWORD",
   "DB_NAME",
   "DB_DIALECT",
-  "BACKEND_PORT",
+  "PORT",
   "REACT_FRONT_END_URL",
   "JWT_SECRET_KEY",
   "TOKEN_EXPIRATION"
