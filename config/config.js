@@ -20,6 +20,7 @@ module.exports = {
     connectionString: process.env.DATABASE_URL,
     dialect: 'postgres',
     protocol: 'postgres',
+    database: process.env.DB_NAME,
     dialectOptions: {
       ssl: {
         rejectUnauthorized: false,
