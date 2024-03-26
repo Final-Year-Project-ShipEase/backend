@@ -30,6 +30,9 @@ const createVehicle = async (req, res) => {
     location,
     trackerNo,
     ownerCnic,
+    cost,
+    width,
+    height,
   } = req.body;
   try {
     const vehicle = await Vehicle.create({
@@ -41,6 +44,9 @@ const createVehicle = async (req, res) => {
       location,
       trackerNo,
       ownerCnic,
+      cost,
+      width,
+      height,
     });
     return res.status(201).json(vehicle);
   } catch (error) {

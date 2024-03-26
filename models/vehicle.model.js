@@ -32,6 +32,15 @@ module.exports = (sequelize) => {
     ownerCnic: {
       type: DataTypes.STRING,
     },
+    cost: {
+      type: DataTypes.INTEGER,
+    },
+    width: {
+      type: DataTypes.STRING,
+    },
+    height: {
+      type: DataTypes.STRING,
+    },
   });
 
   Vehicle.associate = (models) => {

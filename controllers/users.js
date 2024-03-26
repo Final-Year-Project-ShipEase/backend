@@ -142,9 +142,9 @@ exports.getUsersWithPagination = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { username } });
 
     if (user && (await bcrypt.compare(password, user.password))) {
       res.json(user);
