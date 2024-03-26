@@ -49,6 +49,8 @@ exports.createBooking = async (req, res) => {
     status,
     date,
     total_bill,
+    width,
+    height,
   } = req.body;
   try {
     const newBooking = await Booking.create({
@@ -60,6 +62,8 @@ exports.createBooking = async (req, res) => {
       status,
       date,
       total_bill,
+      width,
+      height,
     });
     res.status(201).json(newBooking);
   } catch (error) {
@@ -78,6 +82,8 @@ exports.updateBooking = async (req, res) => {
     status,
     date,
     total_bill,
+    width,
+    height,
   } = req.body;
   try {
     const booking = await Booking.findByPk(id);
@@ -91,6 +97,8 @@ exports.updateBooking = async (req, res) => {
         status,
         date,
         total_bill,
+        width,
+        height,
       });
       res.json(booking);
     } else {
