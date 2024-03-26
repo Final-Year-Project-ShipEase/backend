@@ -17,6 +17,8 @@ if (NODE_ENV === 'production') {
       },
     },
   });
+  console.log('Connected to production database');
+  console.log('NODE_ENV:', process.env.DATABASE_URL);
 } else {
   // For non-production environments or when DATABASE_URL is not used
   sequelize = new Sequelize({
