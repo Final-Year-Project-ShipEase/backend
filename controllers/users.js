@@ -20,9 +20,9 @@ const calculatePagination = (totalItems, pageSize, currentPage) => {
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.findAll();
-    res.json(users);
+    return res.json(users);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -31,12 +31,12 @@ exports.getUserById = async (req, res) => {
   try {
     const user = await User.findByPk(id);
     if (user) {
-      res.json(user);
+      return res.json(user);
     } else {
-      res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -85,10 +85,10 @@ exports.createUser = async (req, res) => {
       phoneNo: newUser.phoneNo,
       city: newUser.city,
     };
-    res.status(201).json(userResponse);
+    return res.status(201).json(userResponse);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An unexpected error occurred.' });
+    return res.status(500).json({ error: 'An unexpected error occurred.' });
   }
 };
 
@@ -99,12 +99,12 @@ exports.updateUser = async (req, res) => {
     const user = await User.findByPk(id);
     if (user) {
       await user.update({ username, name, email, password, phoneNo, city });
-      res.json(user);
+      return res.json(user);
     } else {
-      res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -114,12 +114,12 @@ exports.deleteUserById = async (req, res) => {
     const user = await User.findByPk(id);
     if (user) {
       await user.destroy();
-      res.json({ message: 'User deleted successfully' });
+      return res.json({ message: 'User deleted successfully' });
     } else {
-      res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -135,9 +135,9 @@ exports.getUsersWithPagination = async (req, res) => {
 
     const paginationData = calculatePagination(count, pageSize, page);
 
-    res.json({ users: rows, pagination: paginationData });
+    return res.json({ users: rows, pagination: paginationData });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -147,10 +147,10 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ where: { username } });
 
     if (user && (await bcrypt.compare(password, user.password))) {
-      res.json(user);
+      return res.json(user);
     }
-    res.status(401).json({ error: 'Invalid email or password' });
+    return res.status(401).json({ error: 'Invalid email or password' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
