@@ -2,6 +2,7 @@
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const { sendEmail } = require('../utils/nodemailer');
+const e = require('express');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -152,6 +153,8 @@ exports.login = async (req, res) => {
         message: 'User logged in successfully',
         user,
       });
+    } else {
+      return res.status(401).json({ error: 'Invalid email or password' });
     }
     return res.status(401).json({ error: 'Invalid email or password' });
   } catch (error) {
