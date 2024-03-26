@@ -13,6 +13,7 @@ if (NODE_ENV === 'production') {
     protocol: 'postgres',
     dialectOptions: {
       ssl: {
+        require: true,
         rejectUnauthorized: false,
       },
     },

@@ -23,8 +23,20 @@ module.exports = (sequelize) => {
     startDate: {
       type: DataTypes.DATE,
     },
-    endDate: {
-      type: DataTypes.DATE,
+    width: {
+      type: DataTypes.STRING,
+    },
+    height: {
+      type: DataTypes.STRING,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+    },
+    description: {
+      type: DataTypes.STRING,
+    },
+    status: {
+      type: DataTypes.STRING,
     },
   });
 

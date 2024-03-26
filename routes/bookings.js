@@ -6,13 +6,10 @@ const bookingController = require('../controllers/bookings');
 module.exports = (app) => {
   router.get('/bookings', bookingController.getAllBookings);
   router.get('/booking/:id', bookingController.getBookingById);
+  router.get('/bookings/tenant/:id', bookingController.getBookingByTenantId);
   router.post('/booking', bookingController.createBooking);
   router.put('/booking/:id', bookingController.updateBooking);
   router.delete('/booking/:id', bookingController.deleteBookingById);
-  router.get(
-    'bookings/tenant/:tenant_id',
-    bookingController.getBookingByTenantId
-  );
   // Index route with backend pagination of 10 results
   router.get('/bookings/index', bookingController.getBookingsWithPagination);
 
