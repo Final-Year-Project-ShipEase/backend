@@ -156,7 +156,6 @@ exports.login = async (req, res) => {
     } else {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
-    return res.status(401).json({ error: 'Invalid email or password' });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
