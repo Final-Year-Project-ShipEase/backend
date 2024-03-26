@@ -172,3 +172,14 @@ exports.getPaymentsForBookingWithPagination = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// get bookings by tenant id
+exports.getBookingByTenantId = async (req, res) => {
+  const { tenant_id } = req.params;
+  try {
+    const bookings = await Booking.findAll({ where: { tenant_id } });
+    res.json(bookings);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
