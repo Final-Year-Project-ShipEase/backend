@@ -34,6 +34,7 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.BLOB,
+    },
     cost: {
       type: DataTypes.INTEGER,
     },
