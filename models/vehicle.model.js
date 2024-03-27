@@ -32,6 +32,8 @@ module.exports = (sequelize) => {
     ownerCnic: {
       type: DataTypes.STRING,
     },
+    image: {
+      type: DataTypes.BLOB,
     cost: {
       type: DataTypes.INTEGER,
     },

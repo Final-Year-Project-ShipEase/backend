@@ -34,22 +34,27 @@ const createVehicle = async (req, res) => {
     width,
     height,
   } = req.body;
+
+  const binaryImageData = Buffer.from(req.body.image, 'base64');
+
   try {
     const vehicle = await Vehicle.create({
       tenant_id,
       driver_id,
-      type,
+      type: [type],
       regNo,
       status,
       location,
       trackerNo,
       ownerCnic,
+      image: binaryImageData,
       cost,
       width,
       height,
     });
     return res.status(201).json(vehicle);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ error: error.message });
   }
 };
