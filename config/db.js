@@ -3,15 +3,14 @@ const config = require('./config');
 require('dotenv').config();
 
 // Assuming NODE_ENV will be either 'development', 'test', or 'production'
-const NODE_ENV = process.env.NODE_ENV || 'development';
+const NODE_ENV = process.env.NODE_ENV || 'production';
 
 let sequelize;
 
-// Check if the environment is 'production' and if 'use_env_variable' is specified in the config
-if (NODE_ENV === 'production' && config[NODE_ENV].use_env_variable) {
-  // For Heroku or other production environments where DATABASE_URL is provided
-  sequelize = new Sequelize(process.env[config[NODE_ENV].use_env_variable], {
-    ...config[NODE_ENV],
+if (NODE_ENV === 'production') {
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    protocol: 'postgres',
     dialectOptions: {
       ssl: {
         require: true,
@@ -19,6 +18,8 @@ if (NODE_ENV === 'production' && config[NODE_ENV].use_env_variable) {
       },
     },
   });
+  console.log('Connected to production database');
+  console.log('NODE_ENV:', process.env.DATABASE_URL);
 } else {
   // For non-production environments or when DATABASE_URL is not used
   sequelize = new Sequelize({

@@ -30,6 +30,9 @@ const createVehicle = async (req, res) => {
     location,
     trackerNo,
     ownerCnic,
+    cost,
+    width,
+    height,
   } = req.body;
 
   const binaryImageData = Buffer.from(req.body.image, 'base64');
@@ -45,6 +48,9 @@ const createVehicle = async (req, res) => {
       trackerNo,
       ownerCnic,
       image: binaryImageData,
+      cost,
+      width,
+      height,
     });
     return res.status(201).json(vehicle);
   } catch (error) {

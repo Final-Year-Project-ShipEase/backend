@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const driverApprovalController = require('../controllers/driver_approvals');
-const TokenValidator = require('../middleware/tokenValidator');
 
 module.exports = (app) => {
   router.get(
@@ -15,17 +14,14 @@ module.exports = (app) => {
   );
   router.post(
     '/driverApproval',
-    TokenValidator,
     driverApprovalController.createDriverApproval
   );
   router.put(
     '/driverApproval/:driver_id',
-    TokenValidator,
     driverApprovalController.updateDriverApproval
   );
   router.delete(
     '/driverApproval/:driver_id',
-    TokenValidator,
     driverApprovalController.deleteDriverApprovalById
   );
 

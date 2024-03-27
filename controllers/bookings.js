@@ -1,5 +1,6 @@
 // controllers/bookingController.js
 const { Booking, PoolRequest, Payment } = require('../models');
+const { Op } = require('sequelize');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
   const totalPages = Math.ceil(totalItems / pageSize);
@@ -48,6 +49,8 @@ exports.createBooking = async (req, res) => {
     status,
     date,
     total_bill,
+    width,
+    height,
   } = req.body;
   try {
     const newBooking = await Booking.create({
@@ -59,6 +62,8 @@ exports.createBooking = async (req, res) => {
       status,
       date,
       total_bill,
+      width,
+      height,
     });
     res.status(201).json(newBooking);
   } catch (error) {
@@ -77,6 +82,8 @@ exports.updateBooking = async (req, res) => {
     status,
     date,
     total_bill,
+    width,
+    height,
   } = req.body;
   try {
     const booking = await Booking.findByPk(id);
@@ -90,6 +97,8 @@ exports.updateBooking = async (req, res) => {
         status,
         date,
         total_bill,
+        width,
+        height,
       });
       res.json(booking);
     } else {
@@ -168,6 +177,30 @@ exports.getPaymentsForBookingWithPagination = async (req, res) => {
     const paginationData = calculatePagination(count, pageSize, page);
 
     res.json({ payments: rows, pagination: paginationData });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// get bookings by tenant id
+exports.getBookingByTenantId = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // find all where tenant_id is equal to id and status is not equal to 'completed'
+    const bookings = await Booking.findAll({
+      where: {
+        tenant_id: id,
+        status: {
+          [Op.ne]: 'completed',
+        },
+      },
+    });
+    if (bookings) {
+      res.json(bookings);
+    } else {
+      res.status(404).json({ error: 'Bookings not found' });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

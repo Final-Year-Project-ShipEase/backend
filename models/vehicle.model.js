@@ -34,6 +34,14 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.BLOB,
+    cost: {
+      type: DataTypes.INTEGER,
+    },
+    width: {
+      type: DataTypes.STRING,
+    },
+    height: {
+      type: DataTypes.STRING,
     },
   });
 

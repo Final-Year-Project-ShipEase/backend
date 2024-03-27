@@ -69,7 +69,11 @@ exports.createDriver = async (req, res) => {
       cnic,
       trackerNo,
     });
-    res.status(201).json(newDriver);
+    // return status 201 for successful creation and return the new driver
+    return res.json({
+      status: 201,
+      driver: newDriver,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
