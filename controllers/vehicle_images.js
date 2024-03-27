@@ -2,11 +2,7 @@ const { VehicleImages } = require('../models');
 
 // Create new vehicle images
 const createVehicleImage = async (req, res) => {
-  const { role } = req.user;
 
-  if (role != 'tenant') {
-    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
-  }
   try {
     const vehicleImages = await VehicleImages.create(req.body);
     return res.status(201).json(vehicleImages);
@@ -42,11 +38,7 @@ const getVehicleImageById = async (req, res) => {
 // Update vehicle images by ID
 const updateVehicleImage = async (req, res) => {
   const vehicleImagesId = req.params.id;
-  const { role } = req.user;
 
-  if (role != 'tenant') {
-    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
-  }
   try {
     const [updatedRows] = await VehicleImages.update(req.body, {
       where: { id: vehicleImagesId },
@@ -64,11 +56,7 @@ const updateVehicleImage = async (req, res) => {
 // Delete vehicle images by ID
 const deleteVehicleImageById = async (req, res) => {
   const vehicleImagesId = req.params.id;
-  const { role } = req.user;
 
-  if (role != 'tenant') {
-    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
-  }
   try {
     const deletedRows = await VehicleImages.destroy({
       where: { id: vehicleImagesId },

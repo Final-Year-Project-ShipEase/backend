@@ -42,11 +42,7 @@ exports.getDriverLicenseImagesById = async (req, res) => {
 
 exports.createDriverLicenseImages = async (req, res) => {
   const { driver_id, license, profilePicture } = req.body;
-  const { role } = req.user;
 
-  if (role != 'tenant') {
-    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
-  }
   try {
     const newDriverLicenseImages = await DriverLicenseImages.create({
       driver_id,
@@ -62,11 +58,7 @@ exports.createDriverLicenseImages = async (req, res) => {
 exports.updateDriverLicenseImages = async (req, res) => {
   const { driver_id } = req.params;
   const { license, profilePicture } = req.body;
-  const { role } = req.user;
 
-  if (role != 'tenant') {
-    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
-  }
   try {
     const driverLicenseImages = await DriverLicenseImages.findOne({
       where: { driver_id },
@@ -84,11 +76,7 @@ exports.updateDriverLicenseImages = async (req, res) => {
 
 exports.deleteDriverLicenseImagesById = async (req, res) => {
   const { driver_id } = req.params;
-  const { role } = req.user;
 
-  if (role != 'tenant') {
-    return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
-  }
   try {
     const driverLicenseImages = await DriverLicenseImages.findOne({
       where: { driver_id },

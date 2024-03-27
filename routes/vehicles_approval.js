@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const vehicleApprovalController = require('../controllers/vehicles_approval');
-const TokenValidator = require('../middleware/tokenValidator');
 
 module.exports = (app) => {
   router.post(
     '/vehicleApproval',
-    TokenValidator,
     vehicleApprovalController.createVehicleApproval
   );
   router.get(
@@ -19,12 +17,10 @@ module.exports = (app) => {
   );
   router.put(
     '/vehicleApproval/:id',
-    TokenValidator,
     vehicleApprovalController.updateVehicleApproval
   );
   router.delete(
     '/vehicleApproval/:id',
-    TokenValidator,
     vehicleApprovalController.deleteVehicleApprovalById
   );
 
