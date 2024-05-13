@@ -51,6 +51,9 @@ module.exports = (sequelize) => {
     LicenseImage: {
       type: DataTypes.BLOB,
     },
+    inspectionImage: {
+      type: DataTypes.BLOB,
+    },
   });
 
   Vehicle.associate = (models) => {

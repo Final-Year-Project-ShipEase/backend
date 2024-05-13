@@ -34,11 +34,14 @@ const createVehicle = async (req, res) => {
     cost,
     width,
     height,
-    LicenseImage,
   } = req.body;
 
   const binaryImageData = Buffer.from(req.body.image, 'base64');
   const binaryLicenseImageData = Buffer.from(req.body.LicenseImage, 'base64');
+  const binaryInspectionImageData = Buffer.from(
+    req.body.inspectionImage,
+    'base64'
+  );
 
   try {
     const vehicle = await Vehicle.create({
@@ -55,6 +58,7 @@ const createVehicle = async (req, res) => {
       width,
       height,
       LicenseImage: binaryLicenseImageData,
+      inspectionImage: binaryInspectionImageData,
     });
     return res.status(201).json(vehicle);
   } catch (error) {
