@@ -31,5 +31,7 @@ module.exports = (app) => {
     vehicleController.getVehicleImagesForVehicleWithPagination
   );
 
+  router.put('/vehicle/:vehicle_id/approve', vehicleController.approveVehicle);
+
   app.use('/', router);
 };

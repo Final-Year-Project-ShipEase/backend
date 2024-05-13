@@ -44,6 +44,13 @@ module.exports = (sequelize) => {
     height: {
       type: DataTypes.STRING,
     },
+    approved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
+    LicenseImage: {
+      type: DataTypes.BLOB,
+    },
   });
 
   Vehicle.associate = (models) => {

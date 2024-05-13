@@ -10,6 +10,8 @@ const getDataToSend = (tenant) => ({
   id: tenant.id,
   email: tenant.email,
   role: 'tenant',
+  username: tenant.username,
+  name: tenant.name,
 });
 
 const createTokens = async (tenant) => {
@@ -62,6 +64,7 @@ exports.login = async (req, res) => {
 
   tenant.token = token;
   await tenant.save();
+  console.log('tenant', tenant);
   res.json({
     success: true,
     message: 'tenant logged in successfully',

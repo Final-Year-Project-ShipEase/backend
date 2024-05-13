@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const {
   Vehicle,
   VehicleDetail,
@@ -33,9 +34,11 @@ const createVehicle = async (req, res) => {
     cost,
     width,
     height,
+    LicenseImage,
   } = req.body;
 
   const binaryImageData = Buffer.from(req.body.image, 'base64');
+  const binaryLicenseImageData = Buffer.from(req.body.LicenseImage, 'base64');
 
   try {
     const vehicle = await Vehicle.create({
@@ -51,6 +54,7 @@ const createVehicle = async (req, res) => {
       cost,
       width,
       height,
+      LicenseImage: binaryLicenseImageData,
     });
     return res.status(201).json(vehicle);
   } catch (error) {
@@ -62,7 +66,8 @@ const createVehicle = async (req, res) => {
 // Get all vehicles
 const getAllVehicles = async (req, res) => {
   try {
-    const vehicles = await Vehicle.findAll();
+    // find all the vehicles where approved is not equal to true
+    const vehicles = await Vehicle.findAll({ where: { approved: false } });
     return res.status(200).json(vehicles);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -149,7 +154,7 @@ const getTenantForVehicleById = async (req, res) => {
   const pageSize = 10;
   try {
     const { count, rows } = await Vehicle.findAndCountAll({
-      where: { tenant_id },
+      where: { tenant_id, approved: true },
       limit: pageSize,
       offset: (page - 1) * pageSize,
     });
@@ -254,6 +259,24 @@ const getVehicleImagesForVehicleWithPagination = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+const approveVehicle = async (req, res) => {
+  const vehicle_id = req.params.vehicle_id;
+  try {
+    const vehicle = await Vehicle.findByPk(vehicle_id);
+    if (!vehicle) {
+      return res.status(404).json({ error: 'Vehicle not found' });
+    }
+
+    console.log('Vehicle', vehicle);
+    vehicle.approved = true;
+    await vehicle.save();
+    return res.status(200).json(vehicle);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createVehicle,
   getAllVehicles,
@@ -265,4 +288,5 @@ module.exports = {
   getVehicleImagesForVehicleWithPagination,
   getTenantForVehicleById,
   getVehicleDetailsForVehicleWithPagination,
+  approveVehicle,
 };
