@@ -42,7 +42,7 @@ exports.getUserById = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  const { username, name, email, password, phoneNo, city } = req.body;
+  const { name, username, email, password, phoneNo, city, otp } = req.body; // Include otp in the request body
 
   try {
     const userExists = await User.findOne({ where: { email } });
@@ -56,7 +56,6 @@ exports.createUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const otp = Math.floor(1000 + Math.random() * 9000); // Generates a 4-digit OTP
 
     const newUser = await User.create({
       username,
@@ -66,6 +65,8 @@ exports.createUser = async (req, res) => {
       phoneNo,
       city,
     });
+
+    console.log(newUser);
 
     // Attempt to send an email to the user
     try {
@@ -86,20 +87,30 @@ exports.createUser = async (req, res) => {
       phoneNo: newUser.phoneNo,
       city: newUser.city,
     };
-    return res.status(201).json(userResponse);
+    return res.status(200).json(userResponse);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'An unexpected error occurred.' });
   }
 };
-
 exports.updateUser = async (req, res) => {
   const { id } = req.params;
-  const { username, name, email, password, phoneNo, city } = req.body;
+  const { name, username, email, password, phoneNo, city } = req.body;
   try {
     const user = await User.findByPk(id);
     if (user) {
-      await user.update({ username, name, email, password, phoneNo, city });
+      if (name) user.name = name;
+      if (username) user.username = username;
+      if (email) user.email = email;
+      if (password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        user.password = hashedPassword;
+      }
+      if (phoneNo) user.phoneNo = phoneNo;
+      if (city) user.city = city;
+
+      // Save the updated user
+      await user.save();
       return res.json(user);
     } else {
       return res.status(404).json({ error: 'User not found' });
