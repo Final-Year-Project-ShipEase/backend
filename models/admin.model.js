@@ -22,6 +22,14 @@ module.exports = (sequelize) => {
     data: {
       type: DataTypes.JSON,
     },
+    token: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    refreshToken: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 
   Admin.associate = (models) => {

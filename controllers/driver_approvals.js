@@ -40,6 +40,7 @@ exports.getDriverApprovalById = async (req, res) => {
 
 exports.createDriverApproval = async (req, res) => {
   const { driver_id, tenant_id, admin_id, permission, status } = req.body;
+
   try {
     const newDriverApproval = await DriverApproval.create({
       driver_id,
@@ -49,7 +50,11 @@ exports.createDriverApproval = async (req, res) => {
       status,
     });
 
-    res.status(201).json(newDriverApproval);
+    res.json({
+      message: 'DriverApproval created successfully',
+      driverApproval: newDriverApproval,
+      status: 201,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -58,6 +63,7 @@ exports.createDriverApproval = async (req, res) => {
 exports.updateDriverApproval = async (req, res) => {
   const { driver_id } = req.params;
   const { tenant_id, admin_id, permission, status } = req.body;
+
   try {
     const driverApproval = await DriverApproval.findByPk(driver_id);
     if (driverApproval) {
@@ -73,6 +79,7 @@ exports.updateDriverApproval = async (req, res) => {
 
 exports.deleteDriverApprovalById = async (req, res) => {
   const { driver_id } = req.params;
+
   try {
     const driverApproval = await DriverApproval.findByPk(driver_id);
     if (driverApproval) {

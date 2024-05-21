@@ -37,6 +37,7 @@ const getVehicleApprovalById = async (req, res) => {
 // Update vehicle approval by ID
 const updateVehicleApproval = async (req, res) => {
   const vehicleApprovalId = req.params.id;
+
   try {
     const [updatedRows] = await VehicleApproval.update(req.body, {
       where: { id: vehicleApprovalId },
@@ -56,6 +57,7 @@ const updateVehicleApproval = async (req, res) => {
 // Delete vehicle approval by ID
 const deleteVehicleApprovalById = async (req, res) => {
   const vehicleApprovalId = req.params.id;
+
   try {
     const deletedRows = await VehicleApproval.destroy({
       where: { id: vehicleApprovalId },

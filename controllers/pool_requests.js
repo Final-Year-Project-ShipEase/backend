@@ -1,4 +1,5 @@
 // controllers/poolRequestController.js
+const { Op } = require('sequelize');
 const { PoolRequest } = require('../models');
 
 const calculatePagination = (totalItems, pageSize, currentPage) => {
@@ -17,7 +18,13 @@ const calculatePagination = (totalItems, pageSize, currentPage) => {
 
 exports.getAllPoolRequests = async (req, res) => {
   try {
-    const poolRequests = await PoolRequest.findAll();
+    const poolRequests = await PoolRequest.findAll({
+      where: {
+        status: {
+          [Op.not]: 'booked',
+        },
+      },
+    });
     res.json(poolRequests);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -39,7 +46,24 @@ exports.getPoolRequestById = async (req, res) => {
 };
 
 exports.createPoolRequest = async (req, res) => {
-  const { booking_id, types, city, destination, price,  startDate, endDate } = req.body;
+  const {
+    booking_id,
+    types,
+    city,
+    destination,
+    startDate,
+    width,
+    height,
+    price,
+    description,
+    status,
+  } = req.body;
+
+  // const { role } = req.user;
+
+  // if (role != 'tenant') {
+  //   return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  // }
   try {
     const newPoolRequest = await PoolRequest.create({
       booking_id,
@@ -48,8 +72,13 @@ exports.createPoolRequest = async (req, res) => {
       destination,
       price,
       startDate,
-      endDate,
+      width,
+      height,
+      price,
+      description,
+      status,
     });
+
     res.status(201).json(newPoolRequest);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -58,7 +87,20 @@ exports.createPoolRequest = async (req, res) => {
 
 exports.updatePoolRequest = async (req, res) => {
   const { id } = req.params;
-  const { booking_id, types, city, destination, price, startDate, endDate } = req.body;
+
+  const {
+    booking_id,
+    types,
+    city,
+    destination,
+    startDate,
+    width,
+    height,
+    price,
+    description,
+    status,
+  } = req.body;
+
   try {
     const poolRequest = await PoolRequest.findByPk(id);
     if (poolRequest) {
@@ -69,7 +111,11 @@ exports.updatePoolRequest = async (req, res) => {
         destination,
         price,
         startDate,
-        endDate,
+        width,
+        height,
+        price,
+        description,
+        status,
       });
       res.json(poolRequest);
     } else {
@@ -82,6 +128,11 @@ exports.updatePoolRequest = async (req, res) => {
 
 exports.deletePoolRequestById = async (req, res) => {
   const { id } = req.params;
+  // const { role } = req.user;
+
+  // if (role != 'tenant') {
+  //   return handleErrorResponse(res, 401, 'Token is not valid for Tenant');
+  // }
   try {
     const poolRequest = await PoolRequest.findByPk(id);
     if (poolRequest) {

@@ -32,6 +32,12 @@ module.exports = (sequelize) => {
     trackerNo: {
       type: DataTypes.STRING,
     },
+    profileImage: {
+      type: DataTypes.BLOB,
+    },
+    licenseImage: {
+      type: DataTypes.BLOB,
+    },
   });
 
   Driver.associate = (models) => {

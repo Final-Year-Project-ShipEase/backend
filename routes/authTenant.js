@@ -1,8 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const authTenantController = require('../controllers/authTenant');
+const RequestValidator = require('../middleware/requestValidator');
+const Schema = require('../joiSchemas/auth');
+const TokenValidator = require('../middleware/tokenValidator');
 
-router.post('/tenant/auth/login', authTenantController.createAccessToken);
-router.get('/tenant/auth/protected', authTenantController.getAccessToken);
-
-module.exports = router;
+module.exports = (app) => {
+  router.post(
+    '/login',
+    RequestValidator(Schema.login),
+    authTenantController.login
+  );
+  router.get('/refresh', authTenantController.refreshAccessToken);
+  router.get('/verify', authTenantController.verifyAccessToken);
+  router.post(
+    '/updatepassword',
+    RequestValidator(Schema.updatePassword),
+    TokenValidator,
+    authTenantController.updatePassword
+  );
+  app.use('/tenant/auth/', router);
+};
