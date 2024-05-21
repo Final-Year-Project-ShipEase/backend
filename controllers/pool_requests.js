@@ -46,7 +46,6 @@ exports.getPoolRequestById = async (req, res) => {
 };
 
 exports.createPoolRequest = async (req, res) => {
-
   const {
     booking_id,
     types,
@@ -71,6 +70,7 @@ exports.createPoolRequest = async (req, res) => {
       types,
       city,
       destination,
+      price,
       startDate,
       width,
       height,
@@ -87,6 +87,7 @@ exports.createPoolRequest = async (req, res) => {
 
 exports.updatePoolRequest = async (req, res) => {
   const { id } = req.params;
+
   const {
     booking_id,
     types,
@@ -108,6 +109,7 @@ exports.updatePoolRequest = async (req, res) => {
         types,
         city,
         destination,
+        price,
         startDate,
         width,
         height,

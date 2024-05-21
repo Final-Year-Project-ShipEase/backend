@@ -20,6 +20,9 @@ module.exports = (sequelize) => {
     destination: {
       type: DataTypes.STRING,
     },
+    price: {
+      type: DataTypes.INTEGER, 
+    },
     startDate: {
       type: DataTypes.DATE,
     },

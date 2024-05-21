@@ -21,3 +21,4 @@ module.exports = (app) => {
   );
   app.use('/admin/auth', router);
 };
+

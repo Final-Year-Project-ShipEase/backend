@@ -20,6 +20,9 @@ module.exports = {
       destination: {
         type: Sequelize.STRING,
       },
+      price: {
+        type: Sequelize.INTEGER,
+      },
       startDate: {
         type: Sequelize.DATE,
       },
