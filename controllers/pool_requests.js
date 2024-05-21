@@ -46,6 +46,7 @@ exports.getPoolRequestById = async (req, res) => {
 };
 
 exports.createPoolRequest = async (req, res) => {
+
   const {
     booking_id,
     types,
@@ -58,6 +59,7 @@ exports.createPoolRequest = async (req, res) => {
     description,
     status,
   } = req.body;
+
   // const { role } = req.user;
 
   // if (role != 'tenant') {
@@ -76,6 +78,7 @@ exports.createPoolRequest = async (req, res) => {
       description,
       status,
     });
+
     res.status(201).json(newPoolRequest);
   } catch (error) {
     res.status(500).json({ error: error.message });
