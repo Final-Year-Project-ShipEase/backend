@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const {
   Vehicle,
   VehicleDetail,
@@ -30,20 +31,38 @@ const createVehicle = async (req, res) => {
     location,
     trackerNo,
     ownerCnic,
+    cost,
+    width,
+    height,
   } = req.body;
+
+  const binaryImageData = Buffer.from(req.body.image, 'base64');
+  const binaryLicenseImageData = Buffer.from(req.body.LicenseImage, 'base64');
+  const binaryInspectionImageData = Buffer.from(
+    req.body.inspectionImage,
+    'base64'
+  );
+
   try {
     const vehicle = await Vehicle.create({
       tenant_id,
       driver_id,
-      type,
+      type: [type],
       regNo,
       status,
       location,
       trackerNo,
       ownerCnic,
+      image: binaryImageData,
+      cost,
+      width,
+      height,
+      LicenseImage: binaryLicenseImageData,
+      inspectionImage: binaryInspectionImageData,
     });
     return res.status(201).json(vehicle);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ error: error.message });
   }
 };
@@ -51,7 +70,8 @@ const createVehicle = async (req, res) => {
 // Get all vehicles
 const getAllVehicles = async (req, res) => {
   try {
-    const vehicles = await Vehicle.findAll();
+    // find all the vehicles where approved is not equal to true
+    const vehicles = await Vehicle.findAll({ where: { approved: false } });
     return res.status(200).json(vehicles);
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -138,7 +158,7 @@ const getTenantForVehicleById = async (req, res) => {
   const pageSize = 10;
   try {
     const { count, rows } = await Vehicle.findAndCountAll({
-      where: { tenant_id },
+      where: { tenant_id, approved: true },
       limit: pageSize,
       offset: (page - 1) * pageSize,
     });
@@ -243,6 +263,24 @@ const getVehicleImagesForVehicleWithPagination = async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 };
+
+const approveVehicle = async (req, res) => {
+  const vehicle_id = req.params.vehicle_id;
+  try {
+    const vehicle = await Vehicle.findByPk(vehicle_id);
+    if (!vehicle) {
+      return res.status(404).json({ error: 'Vehicle not found' });
+    }
+
+    console.log('Vehicle', vehicle);
+    vehicle.approved = true;
+    await vehicle.save();
+    return res.status(200).json(vehicle);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 module.exports = {
   createVehicle,
   getAllVehicles,
@@ -254,4 +292,5 @@ module.exports = {
   getVehicleImagesForVehicleWithPagination,
   getTenantForVehicleById,
   getVehicleDetailsForVehicleWithPagination,
+  approveVehicle,
 };

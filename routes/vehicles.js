@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const vehicleController = require('../controllers/vehicles');
+let multer = require('multer');
+let upload = multer();
 
 module.exports = (app) => {
-  router.post('/vehicle', vehicleController.createVehicle);
+  router.post('/vehicle', upload.fields([]), vehicleController.createVehicle);
   router.get('/vehicles', vehicleController.getAllVehicles);
   router.get('/vehicle/:id', vehicleController.getVehicleById);
   router.put('/vehicle/:id', vehicleController.updateVehicle);
@@ -28,6 +30,8 @@ module.exports = (app) => {
     '/vehicles/:vehicle_id/vehicleImages/index',
     vehicleController.getVehicleImagesForVehicleWithPagination
   );
+
+  router.put('/vehicle/:vehicle_id/approve', vehicleController.approveVehicle);
 
   app.use('/', router);
 };

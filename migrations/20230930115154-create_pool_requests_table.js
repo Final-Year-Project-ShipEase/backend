@@ -23,8 +23,20 @@ module.exports = {
       startDate: {
         type: Sequelize.DATE,
       },
-      endDate: {
-        type: Sequelize.DATE,
+      width: {
+        type: Sequelize.STRING,
+      },
+      height: {
+        type: Sequelize.STRING,
+      },
+      price: {
+        type: Sequelize.INTEGER,
+      },
+      description: {
+        type: Sequelize.STRING,
+      },
+      status: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

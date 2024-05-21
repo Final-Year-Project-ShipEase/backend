@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const poolRequestController = require('../controllers/pool_requests');
-const TokenValidator = require('../middleware/tokenValidator');
 
 module.exports = (app) => {
   router.get('/poolRequests', poolRequestController.getAllPoolRequests);
@@ -14,7 +13,7 @@ module.exports = (app) => {
   );
   router.put(
     '/poolRequest/:id',
-    TokenValidator,
+    // TokenValidator,
     poolRequestController.updatePoolRequest
   );
   router.delete(
