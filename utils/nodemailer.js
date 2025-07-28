@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
   secure: false,
   auth: {
     user: 'f200204@cfd.nu.edu.pk',
-    pass: 'Abdullah.309',
+    pass: '',
   },
 });
 const sendEmail = (userData, otp, res) => {
